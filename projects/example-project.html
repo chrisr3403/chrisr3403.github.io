@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.css" rel="stylesheet" /> 
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.css" rel="stylesheet" />
     <link rel="stylesheet" href="../style.css" type="text/css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -18,55 +18,45 @@
 <body>
 
     <!-- Navbar -->
+    // Start a kaboom game
+    kaboom()
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand owner-name" href="#"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    // Load a sprite asset from "sprites/bean.png", with the name "bean"
+    loadSprite("bean", "/sprites/bean.png")
+    loadSprite("ghosty", "/sprites/ghosty.png")
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="../index.html">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" id="github" target="_blank">Github</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../index.html#projects">Projects</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    // A "Game Object" is the basic unit of entity in kaboom
+    // Game objects are composed from components
+    // Each component gives a game object certain capabilities
 
-    <!-- First Container -->
-    <div class="container-fluid bg-1">
-        <div class="container">
+    // add() assembles a game object from a list of components and add to game, returns the reference of the game object
+    const player = add([
+        sprite("bean"),   // sprite() component makes it render as a sprite
+        pos(120, 80),     // pos() component gives it position, also enables movement
+        rotate(0),        // rotate() component gives it rotation
+        anchor("center"), // anchor() component defines the pivot point (defaults to "topleft")
+    ])
 
-            <h1 class="margin text-center">Example Project</h1>
-            <p>Text about the project</p>
-            <p>More text about the project.</p>
-            <a href="#">Link about the project</a><br>
+    // .onUpdate() is a method on all game objects, it registers an event that runs every frame
+    player.onUpdate(() => {
+        // .angle is a property provided by rotate() component, here we're incrementing the angle by 120 degrees per second, dt() is the time elapsed since last frame in seconds
+        player.angle += 120 * dt()
+    })
 
-            <!--EXAMPLE OF PREVIEW LINK-->
-            <!--<a href="http://yourUserName.github.io/yourRepoName">Preview</a><br>-->
-            <!--EXAMPLE OF GITHUB LINK-->
-            <!--<a href="http://github.com/yourUserName/yourRepoName">Github</a><br>-->
+    // Add multiple game objects
+    for (let i = 0; i < 3; i++) {
 
-            <img src="../img/avatar.png" class="img-fluid project-img">
+        // generate a random point on screen
+        // width() and height() gives the game dimension
+        const x = rand(0, width())
+        const y = rand(0, height())
 
+        add([
+            sprite("ghosty"),
+            pos(x, y),
+        ])
 
-            <div class="row">
-
-                <!--
-                <div class="col-sm-6">
-                    Use this to...
-                </div>
-                <div class="col-sm-6">
-                    ...make two columns
-                </div>
-                -->
+    }
 
             </div>
 

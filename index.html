@@ -7,33 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.css" rel="stylesheet" /> 
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" type="text/css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-// start the game
-kaboom()
 
-// define gravity
-setGravity(2400)
-
-// load a default sprite
-loadBean()
-
-// add character to screen, from a list of components
-const player = add([
-    sprite("bean"),  // renders as a sprite
-    pos(120, 80),    // position in world
-    area(),          // has a collider
-    body(),          // responds to physics and gravity
-])
-
-// jump when player presses "space" key
-onKeyPress("space", () => {
-    // .jump() is provided by the body() component
-    player.jump()
-})
 </head>
 
 <body>
@@ -55,7 +34,7 @@ onKeyPress("space", () => {
                     <a class="nav-link" href="#" id="github" target="_blank">Github</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#projects">Projects</a>
+                    <a class="nav-link" href="Kaboom.js">Projects</a>
                 </li>
             </ul>
         </div>
@@ -118,6 +97,60 @@ onKeyPress("space", () => {
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
     <script src="script.js"></script>
+    <script type="module">
+
+        // import kaboom.js
+        import kaboom from "https://unpkg.com/kaboom@3000.0.1/dist/kaboom.mjs";
+
+        // initialize kaboom context
+        kaboom();
+
+        // add a piece of text at position (120, 80)
+        add([
+            text("hello"),
+            pos(120, 80),
+        ]);
+ // Start a kaboom game
+kaboom()
+
+// Load a sprite asset from "sprites/bean.png", with the name "bean"
+loadSprite("bean", "/sprites/bean.png")
+loadSprite("ghosty", "/sprites/ghosty.png")
+
+// A "Game Object" is the basic unit of entity in kaboom
+// Game objects are composed from components
+// Each component gives a game object certain capabilities
+
+// add() assembles a game object from a list of components and add to game, returns the reference of the game object
+const player = add([
+	sprite("bean"),   // sprite() component makes it render as a sprite
+	pos(120, 80),     // pos() component gives it position, also enables movement
+	rotate(0),        // rotate() component gives it rotation
+	anchor("center"), // anchor() component defines the pivot point (defaults to "topleft")
+])
+
+// .onUpdate() is a method on all game objects, it registers an event that runs every frame
+player.onUpdate(() => {
+	// .angle is a property provided by rotate() component, here we're incrementing the angle by 120 degrees per second, dt() is the time elapsed since last frame in seconds
+	player.angle += 120 * dt()
+})
+
+// Add multiple game objects
+for (let i = 0; i < 3; i++) {
+
+	// generate a random point on screen
+	// width() and height() gives the game dimension
+	const x = rand(0, width())
+	const y = rand(0, height())
+
+	add([
+		sprite("ghosty"),
+		pos(x, y),
+	])
+
+}
+
+        </script>
 </body>
 
 </html>

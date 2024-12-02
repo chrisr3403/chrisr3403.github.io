@@ -1,21 +1,9 @@
-let ownerName = "Christian Ramos"; // update the part BETWEEN the "quotes"
-let userName = "chrisr3403"; // same here
-
-document.querySelectorAll(".owner-name").forEach((e) => {
-    e.innerHTML = ownerName;
-});
-
-document.querySelector("#github").href = "http://github.com/" + userName;
-document.querySelector("#fork").href = "http://github.com/" + userName + "/" + userName + ".github.io";
-
-// Adding game objects to screen
-
 // Start a kaboom game
 kaboom()
 
 // Load a sprite asset from "sprites/bean.png", with the name "bean"
-loadSprite("bean", "/sprites/bean.png")
-loadSprite("ghosty", "/sprites/ghosty.png")
+loadSprite("bean", "/sprites/104-1047414_optimus-prime-pixel-art-transformers-optimus-prime-clipart.png")
+loadSprite("ghosty", "/sprites/104-1047414_optimus-prime-pixel-art-transformers-optimus-prime-clipart.png")
 
 // A "Game Object" is the basic unit of entity in kaboom
 // Game objects are composed from components
@@ -49,4 +37,3 @@ for (let i = 0; i < 3; i++) {
 	])
 
 }
-

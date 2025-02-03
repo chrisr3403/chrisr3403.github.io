@@ -120,12 +120,13 @@ loadSprite("optimus", "104-1047414_optimus-prime-pixel-art-transformers-optimus-
 loadSprite("SkySanctuary", "SkySanctuary.jpg")
 
 add([
-   sprite("SkySanctuary")
+   sprite("SkySanctuary", {width: width(), height: height()})
 ]);
+
 
 const player = add([
 	sprite("optimus"),   // sprite() component makes it render as a sprite
-	pos(120, 80),     // pos() component gives it position, also enables movement
+	pos(-100000000000, -100000000000),     // pos() component gives it position, also enables movement
 ])
 
 // .onUpdate() is a method on all game objects, it registers an event that runs every frame

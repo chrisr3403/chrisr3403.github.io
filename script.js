@@ -10,18 +10,11 @@ document.querySelector("#fork").href = "http://github.com/" + userName + "/" + u
 
 // Adding game objects to screen
 
-// Start a kaboom game
 kaboom()
 
-// Load a sprite asset from "sprites/bean.png", with the name "bean"
 loadSprite("bean", "/sprites/bean.png")
 loadSprite("ghosty", "/sprites/ghosty.png")
 
-// A "Game Object" is the basic unit of entity in kaboom
-// Game objects are composed from components
-// Each component gives a game object certain capabilities
-
-// add() assembles a game object from a list of components and add to game, returns the reference of the game object
 const player = add([
 	sprite("bean"),   // sprite() component makes it render as a sprite
 	pos(120, 80),     // pos() component gives it position, also enables movement

@@ -13,6 +13,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+
+
 </head>
 
 <body>
@@ -106,33 +108,39 @@
         kaboom();
 
         // add a piece of text at position (120, 80)
-        add([
-            text("hello"),
-            pos(120, 80),
-        ]);
- // Start a kaboom game
+// Adding game objects to screen
+
+// Start a kaboom game
+// Adding game objects to screen
+
+// Start a kaboom game
 kaboom()
 
-// Load a sprite asset from "sprites/bean.png", with the name "bean"
-loadSprite("bean", "/sprites/bean.png")
-loadSprite("ghosty", "/sprites/ghosty.png")
+loadSprite("optimus", "104-1047414_optimus-prime-pixel-art-transformers-optimus-prime-clipart.png")
+loadSprite("deathegg", "104-1047414_optimus-prime-pixel-art-transformers-optimus-prime-clipart.png")
 
-// A "Game Object" is the basic unit of entity in kaboom
-// Game objects are composed from components
-// Each component gives a game object certain capabilities
+add([
+   sprite("deathegg")
+]);
 
-// add() assembles a game object from a list of components and add to game, returns the reference of the game object
 const player = add([
-	sprite("bean"),   // sprite() component makes it render as a sprite
+	sprite("optimus"),   // sprite() component makes it render as a sprite
 	pos(120, 80),     // pos() component gives it position, also enables movement
-	rotate(0),        // rotate() component gives it rotation
-	anchor("center"), // anchor() component defines the pivot point (defaults to "topleft")
 ])
 
 // .onUpdate() is a method on all game objects, it registers an event that runs every frame
 player.onUpdate(() => {
 	// .angle is a property provided by rotate() component, here we're incrementing the angle by 120 degrees per second, dt() is the time elapsed since last frame in seconds
 	player.angle += 120 * dt()
+})
+onKeyDown("left", () => {
+    player.move(-SPEED, 0)
+})
+onKeyDown("right", () => {
+    player.move(SPEED, 0)
+})
+onKeyDown("up", () => {
+    player.jump(SPEED, 0)
 })
 
 // Add multiple game objects
@@ -143,12 +151,8 @@ for (let i = 0; i < 3; i++) {
 	const x = rand(0, width())
 	const y = rand(0, height())
 
-	add([
-		sprite("ghosty"),
-		pos(x, y),
-	])
-
 }
+
 
         </script>
 </body>

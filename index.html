@@ -118,6 +118,7 @@ kaboom()
 
 loadSprite("optimus", "104-1047414_optimus-prime-pixel-art-transformers-optimus-prime-clipart.png")
 loadSprite("SkySanctuary", "SkySanctuary.jpg")
+loadSprite("Metal Sonic Ultra", "Ultra Metal Sonic.png")
 
 add([
    sprite("SkySanctuary", {width: width(), height: height()})
@@ -151,6 +152,11 @@ for (let i = 0; i < 3; i++) {
 	// width() and height() gives the game dimension
 	const x = rand(0, width())
 	const y = rand(0, height())
+
+    add([
+		sprite("Metal Sonic Ultra"),
+		pos(10, 10),
+	])
 
 }
 

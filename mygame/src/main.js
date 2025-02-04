@@ -4,16 +4,6 @@ const k = kaboom()
 
 k.onClick(() => k.addKaboom(k.mousePos()))
 
-// Load assets
-loadSprite("Sonic", "/sprites/sonic.png");
-
-kaplay({
-    // Scale the whole game up
-    scale: 4,
-    // Set the default font
-    font: "monospace",
-});
-
 // Loading a multi-frame sprite
 loadSprite("Sonic", "/sprites/sonic.png", {
     // The image contains 9 frames layed out horizontally, slice it into individual frames

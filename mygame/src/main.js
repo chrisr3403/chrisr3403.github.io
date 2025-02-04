@@ -5,7 +5,7 @@ const k = kaboom()
 k.onClick(() => k.addKaboom(k.mousePos()))
 
 // Load assets
-loadSprite("Sonic", "/sprites/sonicrunsmallani2.png");
+loadSprite("Sonic", "/sprites/sonic.png");
 
 kaplay({
     // Scale the whole game up

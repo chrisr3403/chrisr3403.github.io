@@ -6,7 +6,6 @@ k.onClick(() => k.addKaboom(k.mousePos()))
 
 // Load assets
 loadSprite("Sonic", "/sprites/sonicrunsmallani2.png");
-loadSprite("ghosty", "/sprites/Ultra Metal Sonic.png");
 
 kaplay({
     // Scale the whole game up
@@ -16,7 +15,7 @@ kaplay({
 });
 
 // Loading a multi-frame sprite
-loadSprite("Sonic", "/examples/sprites/dino.png", {
+loadSprite("Sonic", "/sprites/sonic.png", {
     // The image contains 9 frames layed out horizontally, slice it into individual frames
     sliceX: 9,
     // Define animations

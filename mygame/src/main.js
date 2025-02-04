@@ -13,7 +13,7 @@ loadSprite("Sonic", "/sprites/sonic.png", {
         "idle": {
             // Starts from frame 0, ends at frame 3
             from: 0,
-            to: 15,
+            to: 3,
             // Frame per second
             speed: 2,
             loop: true,

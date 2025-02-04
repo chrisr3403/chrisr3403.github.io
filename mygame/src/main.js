@@ -2,75 +2,134 @@ import kaboom from "kaboom"
 
 const k = kaboom()
 
-k.loadSprite("bean", "sprites/bean.png")
-
-k.add([
-	k.pos(120, 80),
-	k.sprite("bean"),
-])
-
 k.onClick(() => k.addKaboom(k.mousePos()))
 
-k.loadSprite("Sonic", "sprites/sonic.png")
-k.loadSprite("SkySanctuary", "sprites/SkySanctuary.jpg")
-k.loadSprite("Metal Sonic Ultra", "sprites/Ultra Metal Sonic.png")
+// Load assets
+loadSprite("Sonic", "/sprites/sonicrunsmallani2.png");
+loadSprite("ghosty", "/sprites/Ultra Metal Sonic.png");
 
-add([
-   sprite("SkySanctuary", {width: width(), height: height()})
-]);
+kaplay({
+    // Scale the whole game up
+    scale: 4,
+    // Set the default font
+    font: "monospace",
+});
 
+// Loading a multi-frame sprite
+loadSprite("Sonic", "/examples/sprites/dino.png", {
+    // The image contains 9 frames layed out horizontally, slice it into individual frames
+    sliceX: 9,
+    // Define animations
+    anims: {
+        "idle": {
+            // Starts from frame 0, ends at frame 3
+            from: 0,
+            to: 3,
+            // Frame per second
+            speed: 5,
+            loop: true,
+        },
+        "run": {
+            from: 4,
+            to: 7,
+            speed: 10,
+            loop: true,
+        },
+        // This animation only has 1 frame
+        "jump": 8,
+    },
+});
 
+const SPEED = 120;
+const JUMP_FORCE = 240;
+
+setGravity(640);
+
+// Add our player character
 const player = add([
-	sprite("Sonic"),
-	pos(10, 30),
+    sprite("Sonic"),
+    pos(center()),
+    anchor("center"),
     area(),
     body(),
 ]);
 
-loadSpriteAtlas("sprites/sonicrunsmallani2.gif", {
-    'Sonic': {
-        x: 30,
-        y: 10,
-        width: 144,
-        height: 28,
-        sliceX: 9,
-        anims: {
-            idle: { from: 0, to: 3 },
-            run: { from: 4, to: 7 },
-            hit: 8,
-        },
-    },
-})
+// .play is provided by sprite() component, it starts playing the specified animation (the animation information of "idle" is defined above in loadSprite)
+player.play("idle");
+
+// Add a platform
+add([
+    rect(width(), 24),
+    area(),
+    outline(1),
+    pos(0, height() - 24),
+    body({ isStatic: true }),
+]);
+
+// Switch to "idle" or "run" animation when player hits ground
+player.onGround(() => {
+    if (!isKeyDown("left") && !isKeyDown("right")) {
+        player.play("idle");
+    }
+    else {
+        player.play("run");
+    }
+});
+
+player.onAnimEnd((anim) => {
+    if (anim === "idle") {
+        // You can also register an event that runs when certain anim ends
+    }
+});
+
+onKeyPress("space", () => {
+    if (player.isGrounded()) {
+        player.jump(JUMP_FORCE);
+        player.play("jump");
+    }
+});
+
+onKeyDown("left", () => {
+    player.move(-SPEED, 0);
+    player.flipX = true;
+    // .play() will reset to the first frame of the anim, so we want to make sure it only runs when the current animation is not "run"
+    if (player.isGrounded() && player.curAnim() !== "run") {
+        player.play("run");
+    }
+});
+
+onKeyDown("right", () => {
+    player.move(SPEED, 0);
+    player.flipX = false;
+    if (player.isGrounded() && player.curAnim() !== "run") {
+        player.play("run");
+    }
+});
+["left", "right"].forEach((key) => {
+    onKeyRelease(key, () => {
+        // Only reset to "idle" if player is not holding any of these keys
+        if (player.isGrounded() && !isKeyDown("left") && !isKeyDown("right")) {
+            player.play("idle");
+        }
+    });
+});
+
+const getInfo = () =>
+    `
+Anim: ${player.curAnim()}
+Frame: ${player.frame}
+`.trim();
+
+// Add some text to show the current animation
+const label = add([
+    text(getInfo(), { size: 12 }),
+    color(0, 0, 0),
+    pos(4),
+]);
+
+label.onUpdate(() => {
+    label.text = getInfo();
+});
 
 
 
-
-
-// .onUpdate() is a method on all game objects, it registers an event that runs every frame
-player.onUpdate(() => {
-	// .angle is a property provided by rotate() component, here we're incrementing the angle by 120 degrees per second, dt() is the time elapsed since last frame in seconds
-	player.angle += 120 * dt()
-
-})
-onKeyDown("up", () => {
-    player.jump(SPEED, 0)
-})
-
-loadMusic("shoot", "/music/bossfight.mp3")
-
-// Add multiple game objects
-for (let i = 0; i < 3; i++) {
-
-	// generate a random point on screen
-	// width() and height() gives the game dimension
-	const x = rand(0, width())
-	const y = rand(0, height())
-
-    add([
-		sprite("Metal Sonic Ultra"),
-		pos(900, 30),
-
-
-	])
-
-}

@@ -11,7 +11,7 @@ k.add([
 
 k.onClick(() => k.addKaboom(k.mousePos()))
 
-k.loadSprite("Sonic", "sprites/sonicrunsmallani2.gif")
+k.loadSprite("Sonic", "sprites/sonic.png")
 k.loadSprite("SkySanctuary", "sprites/SkySanctuary.jpg")
 k.loadSprite("Metal Sonic Ultra", "sprites/Ultra Metal Sonic.png")
 
@@ -28,9 +28,9 @@ const player = add([
 ]);
 
 loadSpriteAtlas("sprites/sonicrunsmallani2.gif", {
-    "sonic: {
-        x: 128,
-        y: 68,
+    'Sonic': {
+        x: 30,
+        y: 10,
         width: 144,
         height: 28,
         sliceX: 9,
@@ -43,6 +43,9 @@ loadSpriteAtlas("sprites/sonicrunsmallani2.gif", {
 })
 
 
+
+
+
 // .onUpdate() is a method on all game objects, it registers an event that runs every frame
 player.onUpdate(() => {
 	// .angle is a property provided by rotate() component, here we're incrementing the angle by 120 degrees per second, dt() is the time elapsed since last frame in seconds
@@ -52,6 +55,8 @@ player.onUpdate(() => {
 onKeyDown("up", () => {
     player.jump(SPEED, 0)
 })
+
+loadMusic("shoot", "/music/bossfight.mp3")
 
 // Add multiple game objects
 for (let i = 0; i < 3; i++) {
@@ -64,6 +69,7 @@ for (let i = 0; i < 3; i++) {
     add([
 		sprite("Metal Sonic Ultra"),
 		pos(900, 30),
+
 
 	])
 

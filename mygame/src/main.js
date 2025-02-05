@@ -33,8 +33,8 @@ loadSprite("Sonic", "/sprites/sonic.png", {
     },
 });
 
-const SPEED = 120;
-const JUMP_FORCE = 340;
+const SPEED = 420;
+const JUMP_FORCE = 1040;
 
 setGravity(640);
 
@@ -42,7 +42,7 @@ setGravity(640);
 const player = add([
     sprite("Sonic"),
     pos(center()),
-    anchor("center"),
+    anchor("bot"),
     area(),
     body(),
 ]);
@@ -199,13 +199,13 @@ setGravity(2400);
 const level = addLevel([
     // Design the level layout with symbols
     "@  ^ $$",
-    "=======",
+    "==================================================",
 ], {
     // The size of each grid
     tileWidth: 64,
     tileHeight: 64,
     // The position of the top left block
-    pos: vec2(100, 200),
+    pos: vec2(100, 700),
     // Define what each symbol means (in components)
     tiles: {
         "=": () => [
@@ -249,6 +249,9 @@ player.onCollide("coin", (coin) => {
     play("score");
 });
 
+player.onUpdate(() => {
+    camPos(player.pos)
+})
 
 
 

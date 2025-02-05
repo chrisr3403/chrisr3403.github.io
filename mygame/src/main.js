@@ -205,11 +205,10 @@ player.onCollide("bullet", (bullet) => {
     addKaboom(bullet.pos);
 });
 
-loadSprite("bean", "/sprites/bean.png");
 loadSprite("ring", "/sprites/coin.png");
 loadSprite("spike", "/sprites/spike.png");
+loadSprite("SkySanctuaryLow", "/sprites/SkySanctuaryLow.png");
 loadSprite("grass", "/sprites/grass.png");
-loadSprite("ghosty", "/sprites/ghosty.png");
 loadSound("score", "/examples/sounds/score.mp3");
 
 setGravity(2400);
@@ -218,7 +217,14 @@ const level = addLevel([
     // Design the level layout with symbols
     "@  ^ $$",
     "==================================================",
-    '==================================================',
+    '--------------------------------------------------',
+    '--------------------------------------------------',
+    '--------------------------------------------------',
+    '--------------------------------------------------',
+    '--------------------------------------------------',
+    '--------------------------------------------------',
+    '--------------------------------------------------',
+    '--------------------------------------------------',
 ], {
     // The size of each grid
     tileWidth: 64,
@@ -229,6 +235,12 @@ const level = addLevel([
     tiles: {
         "=": () => [
             sprite("grass"),
+            area(),
+            body({ isStatic: true }),
+            anchor("bot"),
+        ],
+        '-': () => [
+            sprite("SkySanctuaryLow"),
             area(),
             body({ isStatic: true }),
             anchor("bot"),

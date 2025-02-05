@@ -4,8 +4,22 @@ const k = kaboom()
 
 k.onClick(() => k.addKaboom(k.mousePos()))
 
-loadSprite("Ultra Metal", "/sprites/Ultra Metal Sonic.png");
-loadSprite("Ultra Metal", "/sprites/Ultra Metal Sonic.png");
+
+loadSprite("Ultra Metal", "/sprites/Ultra Metal Sonic.png", {
+        // The image contains 9 frames layed out horizontally, slice it into individual frames
+        sliceX: 9,
+        // Define animations
+        anims: {
+            "move": {
+                // Starts from frame 0, ends at frame 3
+                from: 0,
+                to: 2,
+                // Frame per second
+                speed: 2,
+                loop: true,
+            },
+        },
+    });
 loadSprite("SkySanctuary","/sprites/SkySanctuary.jpg")
 
 loadSprite("Sonic", "/sprites/sonic.png", {
@@ -142,12 +156,12 @@ const label = add([
 label.onUpdate(() => {
     label.text = getInfo();
 });
-const ENEMY_SPEED =160;
+const ENEMY_SPEED =360;
 const BULLET_SPEED = 800;
 
 const enemy = add([
     sprite("Ultra Metal"),
-    pos(width() - 80, height() -180),
+    pos(width() - 1080, height() -1080),
     anchor("center"),
     // This enemy cycle between 3 states, and start from "idle" state
     state("move", ["idle", "attack", "move"]),
@@ -216,6 +230,7 @@ const level = addLevel([
     // Design the level layout with symbols
     "@  ^ $$",
     "==================================================",
+
     "==================================================",
     "==================================================",
     "==================================================",

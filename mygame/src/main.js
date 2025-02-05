@@ -5,21 +5,8 @@ const k = kaboom()
 k.onClick(() => k.addKaboom(k.mousePos()))
 
 
-loadSprite("Ultra Metal", "/sprites/Ultra Metal Sonic.png", {
+loadSprite("Ultra Metal", "/sprites/Ultra Metal Sonic.png",)
         // The image contains 9 frames layed out horizontally, slice it into individual frames
-        sliceX: 9,
-        // Define animations
-        anims: {
-            "move": {
-                // Starts from frame 0, ends at frame 3
-                from: 0,
-                to: 2,
-                // Frame per second
-                speed: 2,
-                loop: true,
-            },
-        },
-    });
 loadSprite("SkySanctuary","/sprites/SkySanctuary.jpg")
 
 loadSprite("Sonic", "/sprites/sonic.png", {
@@ -293,7 +280,13 @@ player.onCollide("ring", (ring) => {
     destroy(ring);
     play("score");
 });
-
+scene("game", () => {
+    // This score textObject holds a value property in a plain object
+    const score = add([
+        text("0", { size: 24 }),
+        pos(24, 24),
+        { value: 0 },
+    ]);
 player.onUpdate(() => {
     camPos(player.pos)
 });
@@ -303,8 +296,7 @@ player.onCollide("Ultra Metal", () => {
     addKaboom(player.pos);
 });
 
-
-
+});
 
 
 

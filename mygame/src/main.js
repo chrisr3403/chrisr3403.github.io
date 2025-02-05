@@ -82,7 +82,27 @@ onKeyPress("space", () => {
         player.play("jump");
     }
 });
-
+onKeyPress("p", () => {
+    game.paused = !game.paused;
+    if (curTween) curTween.cancel();
+    curTween = tween(
+        pauseMenu.pos,
+        game.paused ? center() : center().add(0, 700),
+        1,
+        (p) => pauseMenu.pos = p,
+        easings.easeOutElastic,
+    );
+    if (game.paused) {
+        pauseMenu.hidden = false;
+        pauseMenu.paused = false;
+    }
+    else {
+        curTween.onEnd(() => {
+            pauseMenu.hidden = true;
+            pauseMenu.paused = true;
+        });
+    }
+});
 onKeyDown("left", () => {
     player.move(-SPEED, 2);
     player.flipX = true;
@@ -228,7 +248,6 @@ const level = addLevel([
         ],
     },
 });
-
 // Get the player object from tag
 
 // Movements
@@ -252,10 +271,17 @@ player.onCollide("coin", (coin) => {
 player.onUpdate(() => {
     camPos(player.pos)
 })
-
-
-
-
+bean.onUpdate(() => {
+    if (bean.pos.y >= height() || bean.pos.y <= CEILING) {
+        // switch to "lose" scene
+        go("lose", score);
+    }
+});
+bean.onCollide("Ultra Metal", () => {
+    go("lose", score);
+    play("hit");
+    addKaboom(bean.pos);
+});
 
 
 

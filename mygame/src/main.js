@@ -142,12 +142,12 @@ const label = add([
 label.onUpdate(() => {
     label.text = getInfo();
 });
-const ENEMY_SPEED = 160;
+const ENEMY_SPEED =160;
 const BULLET_SPEED = 800;
 
 const enemy = add([
     sprite("Ultra Metal"),
-    pos(width() - 80, height() - 80),
+    pos(width() - 80, height() -180),
     anchor("center"),
     // This enemy cycle between 3 states, and start from "idle" state
     state("move", ["idle", "attack", "move"]),
@@ -204,7 +204,6 @@ player.onCollide("bullet", (bullet) => {
     destroy(player);
     addKaboom(bullet.pos);
 });
-
 loadSprite("ring", "/sprites/coin.png");
 loadSprite("spike", "/sprites/spike.png");
 loadSprite("SkySanctuaryLow", "/sprites/SkySanctuaryLow.png");
@@ -217,14 +216,15 @@ const level = addLevel([
     // Design the level layout with symbols
     "@  ^ $$",
     "==================================================",
-    '--------------------------------------------------',
-    '--------------------------------------------------',
-    '--------------------------------------------------',
-    '--------------------------------------------------',
-    '--------------------------------------------------',
-    '--------------------------------------------------',
-    '--------------------------------------------------',
-    '--------------------------------------------------',
+    "==================================================",
+    "==================================================",
+    "==================================================",
+    "==================================================",
+    "==================================================",
+    "==================================================",
+    "==================================================",
+
+
 ], {
     // The size of each grid
     tileWidth: 64,
@@ -281,18 +281,15 @@ player.onCollide("ring", (ring) => {
 
 player.onUpdate(() => {
     camPos(player.pos)
-})
-bean.onUpdate(() => {
-    if (bean.pos.y >= height() || bean.pos.y <= CEILING) {
-        // switch to "lose" scene
-        go("lose", score);
-    }
 });
-bean.onCollide("Ultra Metal", () => {
+player.onCollide("Ultra Metal", () => {
     go("lose", score);
     play("hit");
-    addKaboom(bean.pos);
+    addKaboom(player.pos);
 });
+
+
+
 
 
 

@@ -8,8 +8,8 @@ loadSprite("Ultra Metal", "/sprites/Ultra Metal Sonic.png");
 loadSprite("Ultra Metal", "/sprites/Ultra Metal Sonic.png");
 loadSprite("SkySanctuary","/sprites/SkySanctuary.jpg")
 
-
 loadSprite("Sonic", "/sprites/sonic.png", {
+
     // The image contains 9 frames layed out horizontally, slice it into individual frames
     sliceX: 9,
     // Define animations
@@ -32,12 +32,10 @@ loadSprite("Sonic", "/sprites/sonic.png", {
         "jump": 8,
     },
 });
-
 const SPEED = 420;
 const JUMP_FORCE = 1040;
 
 setGravity(640);
-
 // Add our player character
 const player = add([
     sprite("Sonic"),
@@ -208,7 +206,7 @@ player.onCollide("bullet", (bullet) => {
 });
 
 loadSprite("bean", "/sprites/bean.png");
-loadSprite("coin", "/sprites/coin.png");
+loadSprite("ring", "/sprites/coin.png");
 loadSprite("spike", "/sprites/spike.png");
 loadSprite("grass", "/sprites/grass.png");
 loadSprite("ghosty", "/sprites/ghosty.png");
@@ -220,6 +218,7 @@ const level = addLevel([
     // Design the level layout with symbols
     "@  ^ $$",
     "==================================================",
+    '==================================================',
 ], {
     // The size of each grid
     tileWidth: 64,
@@ -235,10 +234,10 @@ const level = addLevel([
             anchor("bot"),
         ],
         "$": () => [
-            sprite("coin"),
+            sprite("ring"),
             area(),
             anchor("bot"),
-            "coin",
+            "ring",
         ],
         "^": () => [
             sprite("spike"),
@@ -263,8 +262,8 @@ player.onCollide("danger", () => {
 });
 
 // Eat the coin!
-player.onCollide("coin", (coin) => {
-    destroy(coin);
+player.onCollide("ring", (ring) => {
+    destroy(ring);
     play("score");
 });
 

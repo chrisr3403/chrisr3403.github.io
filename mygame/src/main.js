@@ -5,6 +5,10 @@ const k = kaboom()
 k.onClick(() => k.addKaboom(k.mousePos()))
 
 loadSprite("Ultra Metal", "/sprites/Ultra Metal Sonic.png");
+loadSprite("Ultra Metal", "/sprites/Ultra Metal Sonic.png");
+loadSprite("SkySanctuary","/sprites/SkySanctuary.jpg")
+
+
 loadSprite("Sonic", "/sprites/sonic.png", {
     // The image contains 9 frames layed out horizontally, slice it into individual frames
     sliceX: 9,
@@ -13,7 +17,7 @@ loadSprite("Sonic", "/sprites/sonic.png", {
         "idle": {
             // Starts from frame 0, ends at frame 3
             from: 0,
-            to: 0,
+            to: 4,
             // Frame per second
             speed: 2,
             loop: true,
@@ -182,6 +186,69 @@ player.onCollide("bullet", (bullet) => {
     destroy(player);
     addKaboom(bullet.pos);
 });
+
+loadSprite("bean", "/sprites/bean.png");
+loadSprite("coin", "/sprites/coin.png");
+loadSprite("spike", "/sprites/spike.png");
+loadSprite("grass", "/sprites/grass.png");
+loadSprite("ghosty", "/sprites/ghosty.png");
+loadSound("score", "/examples/sounds/score.mp3");
+
+setGravity(2400);
+
+const level = addLevel([
+    // Design the level layout with symbols
+    "@  ^ $$",
+    "=======",
+], {
+    // The size of each grid
+    tileWidth: 64,
+    tileHeight: 64,
+    // The position of the top left block
+    pos: vec2(100, 200),
+    // Define what each symbol means (in components)
+    tiles: {
+        "=": () => [
+            sprite("grass"),
+            area(),
+            body({ isStatic: true }),
+            anchor("bot"),
+        ],
+        "$": () => [
+            sprite("coin"),
+            area(),
+            anchor("bot"),
+            "coin",
+        ],
+        "^": () => [
+            sprite("spike"),
+            area(),
+            anchor("bot"),
+            "danger",
+        ],
+    },
+});
+
+// Get the player object from tag
+
+// Movements
+onKeyPress("space", () => {
+    if (player.isGrounded()) {
+        player.jump();
+    }
+});
+
+// Back to the original position if hit a "danger" item
+player.onCollide("danger", () => {
+    player.pos = level.tile2Pos(0, 0);
+});
+
+// Eat the coin!
+player.onCollide("coin", (coin) => {
+    destroy(coin);
+    play("score");
+});
+
 
 
 

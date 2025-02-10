@@ -215,14 +215,14 @@ loadSprite("jumpad", "/sprites/jumpad.png");
 loadSprite("SkySanctuaryLow", "/sprites/SkySanctuaryLow.png");
 loadSprite("grass", "/sprites/grass.png");
 loadSound("score", "/examples/sounds/score.mp3");
-loadSound("blast", "/examples/sounds/score.mp3");
+loadSound("blast", "/music/laser_hBUSmJ9.mp3");
 
 setGravity(2400);
 
 const level = addLevel([
     // Design the level layout with symbols
     "@  ^ $$",
-    "========================================================================================================================================="
+"========================================================================================================================================="
 
 ], {
     // The size of each grid
@@ -270,6 +270,7 @@ onKeyPress("space", () => {
 // Back to the original position if hit a "danger" item
 player.onCollide("danger", () => {
     player.pos = level.tile2Pos(0, 0);
+    play("blast");
 });
 
 // Eat the ring!

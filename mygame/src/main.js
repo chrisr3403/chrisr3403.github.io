@@ -199,9 +199,11 @@ loadSprite("ring", "/sprites/Ring.png");
 loadSprite("jumpad", "/sprites/jumpad.png");
 loadSprite("SkySanctuaryLow", "/sprites/SkySanctuaryLow.png");
 loadSprite("grass", "/sprites/grass.png");
-loadSound("ringPickup", "/examples/sounds/score.mp3");
+loadSprite("GIANTRING!", "/sprites/giantring.png");
+loadSound("ringpickup", "/music/RingPickup.mp3");
 loadSound("blast", "/music/laser_hBUSmJ9.mp3");
 loadSound("jump", "/music/sonicjump.mp3");
+
 
 setGravity(2400);
 
@@ -232,15 +234,36 @@ const level = addLevel([
             anchor("bot"),
             "ring",
         ],
+        "@": () => [
+            sprite("GIANTRING!"),
+            area({ scale: 0.5 }),
+            anchor("bot"),
+            pos(0, -12),
+            offscreen({ hide: true }),
+            "portal",
+        ],
         "^": () => [
             sprite("jumpad"),
             area(),
             anchor("bot"),
             "danger",
         ],
-    },
-});
 
+    },
+
+});
+player.onCollide("GIANTRING!", () => {
+    play("GIANTRING");
+    if (levelId + 1 < LEVELS.length) {
+        go("game", {
+            levelId: levelId + 1,
+            coins: coins,
+        });
+    }
+    else {
+        go("win");
+    }
+});
 onKeyPress("space", () => {
     if (player.isGrounded()) {
         player.jump();
@@ -255,7 +278,7 @@ player.onCollide("danger", () => {
 
 player.onCollide("ring", (ring) => {
     destroy(ring);
-    play("ringPickup")
+    play("ringpickup")
 });
 player.onUpdate(() => {
     camPos(player.pos)

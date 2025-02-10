@@ -3,11 +3,11 @@ import kaboom from "kaboom"
 const k = kaboom()
 
 k.onClick(() => k.addKaboom(k.mousePos()))
-
-
 loadSprite("Ultra Metal", "/sprites/Ultra Metal Sonic.png",)
         // The image contains 9 frames layed out horizontally, slice it into individual frames
 loadSprite("SkySanctuary","/sprites/SkySanctuary.jpg")
+
+let score = 0;
 
 loadSprite("Sonic", "/sprites/sonic.png", {
 
@@ -33,6 +33,10 @@ loadSprite("Sonic", "/sprites/sonic.png", {
         "jump": 8,
     },
 });
+({
+    background: [141, 183, 255],
+});
+
 const SPEED = 420;
 const JUMP_FORCE = 1040;
 
@@ -205,8 +209,8 @@ player.onCollide("bullet", (bullet) => {
     destroy(player);
     addKaboom(bullet.pos);
 });
-loadSprite("ring", "/sprites/coin.png");
-loadSprite("spike", "/sprites/spike.png");
+loadSprite("ring", "/sprites/Ring.png");
+loadSprite("jumpad", "/sprites/jumpad.png");
 loadSprite("SkySanctuaryLow", "/sprites/SkySanctuaryLow.png");
 loadSprite("grass", "/sprites/grass.png");
 loadSound("score", "/examples/sounds/score.mp3");
@@ -216,16 +220,7 @@ setGravity(2400);
 const level = addLevel([
     // Design the level layout with symbols
     "@  ^ $$",
-    "==================================================",
-
-    "==================================================",
-    "==================================================",
-    "==================================================",
-    "==================================================",
-    "==================================================",
-    "==================================================",
-    "==================================================",
-
+    "========================================================================================================================================="
 
 ], {
     // The size of each grid
@@ -254,7 +249,7 @@ const level = addLevel([
             "ring",
         ],
         "^": () => [
-            sprite("spike"),
+            sprite("jumpad"),
             area(),
             anchor("bot"),
             "danger",
@@ -275,21 +270,32 @@ player.onCollide("danger", () => {
     player.pos = level.tile2Pos(0, 0);
 });
 
-// Eat the coin!
+// Eat the ring!
 player.onCollide("ring", (ring) => {
     destroy(ring);
     play("score");
 });
+player.onUpdate(() => {
+    camPos(player.pos)
+});
+add
+    sprite("SkySanctuaryLow"),
+    area(),
+    pos(rand(0, width()), i * height() / NUM_PLATFORMS),
+    body({ isStatic: true }),
+    anchor("center"),
+    "platform",
+    {
+    speed: rand(120, 320),
+    dir: choose([-1, 1]),
+    },
 scene("game", () => {
     // This score textObject holds a value property in a plain object
     const score = add([
         text("0", { size: 24 }),
         pos(24, 24),
         { value: 0 },
-    ]);
-player.onUpdate(() => {
-    camPos(player.pos)
-});
+]);
 player.onCollide("Ultra Metal", () => {
     go("lose", score);
     play("hit");

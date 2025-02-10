@@ -201,7 +201,7 @@ loadSprite("SkySanctuaryLow", "/sprites/SkySanctuaryLow.png");
 loadSprite("grass", "/sprites/grass.png");
 loadSound("score", "/examples/sounds/score.mp3");
 loadSound("blast", "/music/laser_hBUSmJ9.mp3");
-loadSound("jump", "/music/laser_hBUSmJ9.mp3");
+loadSound("jump", "/music/sonicjump.mp3");
 
 setGravity(2400);
 

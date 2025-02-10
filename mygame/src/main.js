@@ -207,6 +207,7 @@ enemy.onStateUpdate("move", () => {
 player.onCollide("bullet", (bullet) => {
     destroy(bullet);
     destroy(player);
+    play("blast");
     addKaboom(bullet.pos);
 });
 loadSprite("ring", "/sprites/Ring.png");
@@ -214,6 +215,7 @@ loadSprite("jumpad", "/sprites/jumpad.png");
 loadSprite("SkySanctuaryLow", "/sprites/SkySanctuaryLow.png");
 loadSprite("grass", "/sprites/grass.png");
 loadSound("score", "/examples/sounds/score.mp3");
+loadSound("blast", "/examples/sounds/score.mp3");
 
 setGravity(2400);
 
@@ -224,10 +226,10 @@ const level = addLevel([
 
 ], {
     // The size of each grid
-    tileWidth: 64,
-    tileHeight: 64,
+    tileWidth: 65,
+    tileHeight: 38,
     // The position of the top left block
-    pos: vec2(100, 700),
+    pos: vec2(100, 800),
     // Define what each symbol means (in components)
     tiles: {
         "=": () => [

@@ -183,27 +183,22 @@ enemy.onStateEnter("attack", async () => {
         ]);
     }
 
-    // Waits 1 second to make the enemy enter in "move" state
     await wait(1);
     enemy.enterState("move");
 });
 
-// When we enter "move" state, we stay there for 2 sec and then go back to "idle"
 enemy.onStateEnter("move", async () => {
     await wait(2);
     enemy.enterState("idle");
 });
 
-// .onStateUpdate() is similar to .onUpdate(), it'll run every frame, but in this case
-// Only when the current state is "move"
+
 enemy.onStateUpdate("move", () => {
-    // We move the enemy in the direction of the player
     if (!player.exists()) return;
     const dir = player.pos.sub(enemy.pos).unit();
     enemy.move(dir.scale(ENEMY_SPEED));
 });
 
-// Taking a bullet makes us disappear
 player.onCollide("bullet", (bullet) => {
     destroy(bullet);
     destroy(player);
@@ -220,17 +215,13 @@ loadSound("blast", "/music/laser_hBUSmJ9.mp3");
 setGravity(2400);
 
 const level = addLevel([
-    // Design the level layout with symbols
     "@  ^ $$",
 "========================================================================================================================================="
 
 ], {
-    // The size of each grid
     tileWidth: 65,
     tileHeight: 38,
-    // The position of the top left block
     pos: vec2(100, 800),
-    // Define what each symbol means (in components)
     tiles: {
         "=": () => [
             sprite("grass"),
@@ -258,22 +249,18 @@ const level = addLevel([
         ],
     },
 });
-// Get the player object from tag
 
-// Movements
 onKeyPress("space", () => {
     if (player.isGrounded()) {
         player.jump();
     }
 });
 
-// Back to the original position if hit a "danger" item
 player.onCollide("danger", () => {
     player.pos = level.tile2Pos(0, 0);
     play("blast");
 });
 
-// Eat the ring!
 player.onCollide("ring", (ring) => {
     destroy(ring);
     play("score");

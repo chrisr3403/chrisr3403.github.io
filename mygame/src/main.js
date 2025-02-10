@@ -199,7 +199,7 @@ loadSprite("ring", "/sprites/Ring.png");
 loadSprite("jumpad", "/sprites/jumpad.png");
 loadSprite("SkySanctuaryLow", "/sprites/SkySanctuaryLow.png");
 loadSprite("grass", "/sprites/grass.png");
-loadSound("score", "/examples/sounds/score.mp3");
+loadSound("ringPickup", "/examples/sounds/score.mp3");
 loadSound("blast", "/music/laser_hBUSmJ9.mp3");
 loadSound("jump", "/music/sonicjump.mp3");
 
@@ -255,7 +255,7 @@ player.onCollide("danger", () => {
 
 player.onCollide("ring", (ring) => {
     destroy(ring);
-    play("score");
+    play("ringPickup")
 });
 player.onUpdate(() => {
     camPos(player.pos)

@@ -33,9 +33,6 @@ loadSprite("Sonic", "/sprites/sonic.png", {
         "jump": 8,
     },
 });
-({
-    background: [141, 183, 255],
-});
 
 const SPEED = 420;
 const JUMP_FORCE = 1040;
@@ -76,13 +73,6 @@ player.onGround(() => {
 player.onAnimEnd((anim) => {
     if (anim === "idle") {
         // You can also register an event that runs when certain anim ends
-    }
-});
-
-onKeyPress("space", () => {
-    if (player.isGrounded()) {
-        player.jump(JUMP_FORCE);
-        player.play("jump");
     }
 });
 onKeyPress("p", () => {
@@ -211,6 +201,7 @@ loadSprite("SkySanctuaryLow", "/sprites/SkySanctuaryLow.png");
 loadSprite("grass", "/sprites/grass.png");
 loadSound("score", "/examples/sounds/score.mp3");
 loadSound("blast", "/music/laser_hBUSmJ9.mp3");
+loadSound("jump", "/music/laser_hBUSmJ9.mp3");
 
 setGravity(2400);
 
@@ -253,6 +244,7 @@ const level = addLevel([
 onKeyPress("space", () => {
     if (player.isGrounded()) {
         player.jump();
+        play("jump");
     }
 });
 

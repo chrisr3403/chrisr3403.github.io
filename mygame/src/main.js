@@ -4,6 +4,8 @@ const k = kaboom()
 
 k.onClick(() => k.addKaboom(k.mousePos()))
 
+volume(0.5);
+
 loadSprite("Ultra Metal", "",)
 loadSprite("SkySanctuary","/sprites/SkySanctuary.jpg")
 
@@ -31,8 +33,6 @@ loadSprite("Sonic", "/sprites/sonic.png", {
         "jump": 8,
     },
 });
-const SPEED = 420;
-const JUMP_FORCE = 1040;
 
 setGravity(640);
 // Add our player character
@@ -172,6 +172,7 @@ enemy.onStateEnter("attack", async () => {
     enemy.enterState("move");
 });
 
+
 enemy.onStateEnter("move", async () => {
     await wait(2);
     enemy.enterState("idle");
@@ -260,6 +261,9 @@ player.onCollide("GIANTRING!", () => {
         go("win");
     }
 });
+const SPEED = 1020;
+const JUMP_FORCE = 10040;
+
 onKeyPress("space", () => {
     if (player.isGrounded()) {
         player.jump();
@@ -278,6 +282,16 @@ player.onCollide("ring", (ring) => {
 });
 player.onUpdate(() => {
     camPos(player.pos)
+});
+onKeyPress("M", () => music.paused = !music.paused);
+
+loadMusic("OtherworldlyFoe", "/music/20250203_202258.mp3");
+
+const music = play("OtherworldlyFoe", {
+    loop: true,
+    paused: true,
+backgroundAudio: true,
+background: "5ba675",
 });
 
 add

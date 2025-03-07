@@ -3,15 +3,13 @@ import kaboom from "kaboom"
 const k = kaboom()
 
 k.onClick(() => k.addKaboom(k.mousePos()))
-loadSprite("Ultra Metal", "/sprites/Ultra Metal Sonic.png",)
-        // The image contains 9 frames layed out horizontally, slice it into individual frames
+
+loadSprite("Ultra Metal", "",)
 loadSprite("SkySanctuary","/sprites/SkySanctuary.jpg")
 
 let score = 0;
 
 loadSprite("Sonic", "/sprites/sonic.png", {
-
-    // The image contains 9 frames layed out horizontally, slice it into individual frames
     sliceX: 9,
     // Define animations
     anims: {
@@ -33,7 +31,6 @@ loadSprite("Sonic", "/sprites/sonic.png", {
         "jump": 8,
     },
 });
-
 const SPEED = 420;
 const JUMP_FORCE = 1040;
 
@@ -155,9 +152,7 @@ enemy.onStateEnter("idle", async () => {
     enemy.enterState("attack");
 });
 
-// When we enter "attack" state, we fire a bullet, and enter "move" state after 1 sec
 enemy.onStateEnter("attack", async () => {
-    // Don't do anything if player doesn't exist anymore
     if (player.exists()) {
         const dir = player.pos.sub(enemy.pos).unit();
 
@@ -199,7 +194,7 @@ loadSprite("ring", "/sprites/Ring.png");
 loadSprite("jumpad", "/sprites/jumpad.png");
 loadSprite("SkySanctuaryLow", "/sprites/SkySanctuaryLow.png");
 loadSprite("grass", "/sprites/grass.png");
-loadSprite("GIANTRING!", "/sprites/giantring.png");
+loadSprite("GIANTRING!", "/sprites/giantring.gif");
 loadSound("ringpickup", "/music/RingPickup.mp3");
 loadSound("blast", "/music/laser_hBUSmJ9.mp3");
 loadSound("jump", "/music/sonicjump.mp3");
@@ -208,8 +203,10 @@ loadSound("jump", "/music/sonicjump.mp3");
 setGravity(2400);
 
 const level = addLevel([
-    "@  ^ $$",
-"========================================================================================================================================="
+"=========================================================================================================================================",
+"=                                                                                                                                       =",
+"=             @        $$    $   $     $     $       $           $                 $                                                  @ =",
+"=========================================================================================================================================",
 
 ], {
     tileWidth: 65,
@@ -239,14 +236,13 @@ const level = addLevel([
             area({ scale: 0.5 }),
             anchor("bot"),
             pos(0, -12),
-            offscreen({ hide: true }),
             "portal",
         ],
         "^": () => [
             sprite("jumpad"),
             area(),
             anchor("bot"),
-            "danger",
+            "jump",
         ],
 
     },
@@ -257,7 +253,7 @@ player.onCollide("GIANTRING!", () => {
     if (levelId + 1 < LEVELS.length) {
         go("game", {
             levelId: levelId + 1,
-            coins: coins,
+            ring: ring,
         });
     }
     else {
@@ -271,7 +267,7 @@ onKeyPress("space", () => {
     }
 });
 
-player.onCollide("danger", () => {
+player.onCollide("jump", () => {
     player.pos = level.tile2Pos(0, 0);
     play("blast");
 });
@@ -283,6 +279,7 @@ player.onCollide("ring", (ring) => {
 player.onUpdate(() => {
     camPos(player.pos)
 });
+
 add
     sprite("SkySanctuaryLow"),
     area(),
@@ -308,9 +305,3 @@ player.onCollide("Ultra Metal", () => {
 });
 
 });
-
-
-
-
-
-

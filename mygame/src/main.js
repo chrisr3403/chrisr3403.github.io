@@ -18,7 +18,7 @@ loadSprite("Sonic", "/sprites/sonic.png", {
         "idle": {
             // Starts from frame 0, ends at frame 3
             from: 0,
-            to: 4,
+            to: 0,
             // Frame per second
             speed: 2,
             loop: true,
@@ -280,6 +280,7 @@ player.onCollide("ring", (ring) => {
     destroy(ring);
     play("ringpickup")
 });
+
 player.onUpdate(() => {
     camPos(player.pos)
 });

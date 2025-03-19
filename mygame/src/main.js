@@ -18,15 +18,15 @@ loadSprite("Sonic", "/sprites/sonic.png", {
         "idle": {
             // Starts from frame 0, ends at frame 3
             from:0,
-            to: 1,
+            to: 4,
             // Frame per second
-            speed: 2,
+            speed: 1,
             loop: true,
         },
         "run": {
-            from: 6,
-            to: 7,
-            speed: 10,
+            from:5,
+            to: 8,
+            speed: 30,
             loop: true,
         },
         // This animation only has 1 frame
@@ -42,7 +42,12 @@ const player = add([
     anchor("bot"),
     area(),
     body(),
+    width(100)
 ]);
+
+const JUMP_FORCE = 10000;
+
+const SPEED = 820;
 
 // .play is provided by sprite() component, it starts playing the specified animation (the animation information of "idle" is defined above in loadSprite)
 player.play("idle");
@@ -57,32 +62,19 @@ player.onGround(() => {
     }
 });
 
+onKeyPress("space", () => {
+    if (player.isGrounded()) {
+        player.jump();
+        play("jump");
+    }
+});
+
 player.onAnimEnd((anim) => {
     if (anim === "idle") {
         // You can also register an event that runs when certain anim ends
     }
 });
-onKeyPress("p", () => {
-    game.paused = !game.paused;
-    if (curTween) curTween.cancel();
-    curTween = tween(
-        pauseMenu.pos,
-        game.paused ? center() : center().add(0, 700),
-        1,
-        (p) => pauseMenu.pos = p,
-        easings.easeOutElastic,
-    );
-    if (game.paused) {
-        pauseMenu.hidden = false;
-        pauseMenu.paused = false;
-    }
-    else {
-        curTween.onEnd(() => {
-            pauseMenu.hidden = true;
-            pauseMenu.paused = true;
-        });
-    }
-});
+
 onKeyDown("left", () => {
     player.move(-SPEED, 2);
     player.flipX = true;
@@ -194,11 +186,10 @@ loadSound("jump", "/music/sonicjump.mp3");
 setGravity(2400);
 
 const level = addLevel([
-    "^",
+
+
+"=             @        $$    $ $ $ $$$$$$$$$$$$$$$$ $$     $       $           $                 $                                    @ =",
 "=========================================================================================================================================",
-"=                                                                                                                                       =",
-"=             @        $$    $ $ $ $$$$$$$$$$$$$$$$ $$     $       $           $                 $                                                  @ =",
-"========================================================================================================================================="
 
 ], {
     tileWidth: 65,
@@ -252,16 +243,6 @@ player.onCollide("GIANTRING!", () => {
         go("win");
     }
 });
-const SPEED = 1020;
-const JUMP_FORCE = 10040;
-
-onKeyPress("space", () => {
-    if (player.isGrounded()) {
-        player.jump();
-        play("jump");
-    }
-});
-
 scene("lose", (score) => {
     add([
         sprite("Sonic"),
@@ -282,8 +263,6 @@ player.onCollide("jump", () => {
     player.pos = level.tile2Pos(0, 0);
     play("blast");
 });
-
-
 
 // game over scene
     // go back to game with space is pressed

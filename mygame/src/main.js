@@ -17,16 +17,16 @@ loadSprite("Sonic", "/sprites/sonic.png", {
     anims: {
         "idle": {
             // Starts from frame 0, ends at frame 3
-            from: 0,
-            to: 0,
+            from: 1,
+            to: 1,
             // Frame per second
             speed: 2,
             loop: true,
         },
         "run": {
-            from: 6,
-            to: 7,
-            speed: 10,
+            from: 7,
+            to: 8,
+            speed: 1,
             loop: true,
         },
         // This animation only has 1 frame
@@ -46,16 +46,6 @@ const player = add([
 
 // .play is provided by sprite() component, it starts playing the specified animation (the animation information of "idle" is defined above in loadSprite)
 player.play("idle");
-
-// Add a platform
-add([
-    rect(width(), 24),
-    area(),
-    outline(1),
-    pos(0, height() - 24),
-    anchor("center"),
-    body({ isStatic: true }),
-]);
 
 // Switch to "idle" or "run" animation when player hits ground
 player.onGround(() => {
@@ -204,10 +194,11 @@ loadSound("jump", "/music/sonicjump.mp3");
 setGravity(2400);
 
 const level = addLevel([
+    "^",
 "=========================================================================================================================================",
 "=                                                                                                                                       =",
-"=             @        $$    $   $     $     $       $           $                 $                                                  @ =",
-"=========================================================================================================================================",
+"=             @        $$    $ $ $ $$$$$$$$$$$$$$$$ $$     $       $           $                 $                                                  @ =",
+"========================================================================================================================================="
 
 ], {
     tileWidth: 65,
@@ -237,7 +228,7 @@ const level = addLevel([
             area({ scale: 0.5 }),
             anchor("bot"),
             pos(0, -12),
-            "portal",
+            "",
         ],
         "^": () => [
             sprite("jumpad"),
@@ -271,9 +262,33 @@ onKeyPress("space", () => {
     }
 });
 
+scene("lose", (score) => {
+    add([
+        sprite("Sonic"),
+        pos(width() / 2, height() / 2 - 108),
+        scale(3),
+        anchor("center"),
+    ]);
+
+    // display score
+    add([
+        text(score),
+        pos(width() / 2, height() / 2 + 108),
+        scale(3),
+        anchor("center"),
+    ]);
+
 player.onCollide("jump", () => {
     player.pos = level.tile2Pos(0, 0);
     play("blast");
+});
+
+
+
+// game over scene
+    // go back to game with space is pressed
+    onKeyPress("o", () => go("start"));
+    onClick(() => go("start"));
 });
 
 player.onCollide("ring", (ring) => {
@@ -284,39 +299,10 @@ player.onCollide("ring", (ring) => {
 player.onUpdate(() => {
     camPos(player.pos)
 });
-onKeyPress("M", () => music.paused = !music.paused);
 
-loadMusic("OtherworldlyFoe", "/music/20250203_202258.mp3");
+const NUM_PLATFORMS = 5;
 
-const music = play("OtherworldlyFoe", {
-    loop: true,
-    paused: true,
-backgroundAudio: true,
-background: "5ba675",
-});
 
-add
-    sprite("SkySanctuaryLow"),
-    area(),
-    pos(rand(0, width()), i * height() / NUM_PLATFORMS),
-    body({ isStatic: true }),
-    anchor("center"),
-    "platform",
-    {
-    speed: rand(120, 320),
-    dir: choose([-1, 1]),
-    },
-scene("game", () => {
-    // This score textObject holds a value property in a plain object
-    const score = add([
-        text("0", { size: 24 }),
-        pos(24, 24),
-        { value: 0 },
-]);
-player.onCollide("Ultra Metal", () => {
-    go("lose", score);
-    play("hit");
-    addKaboom(player.pos);
-});
 
-});
+
+

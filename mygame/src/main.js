@@ -45,7 +45,6 @@ const player = add([
     width(100)
 ]);
 
-const JUMP_FORCE = 10000;
 
 const SPEED = 820;
 

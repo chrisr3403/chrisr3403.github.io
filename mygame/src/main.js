@@ -17,16 +17,16 @@ loadSprite("Sonic", "/sprites/sonic.png", {
     anims: {
         "idle": {
             // Starts from frame 0, ends at frame 3
-            from: 1,
+            from:0,
             to: 1,
             // Frame per second
             speed: 2,
             loop: true,
         },
         "run": {
-            from: 7,
-            to: 8,
-            speed: 1,
+            from: 6,
+            to: 7,
+            speed: 10,
             loop: true,
         },
         // This animation only has 1 frame

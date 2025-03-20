@@ -8,21 +8,7 @@ kaboom({
     canvas: document.getElementById("game"),
     background: [10, 100, 200], // RGB values for black background
 });
-
-loadSound("Sky Sanctuary act 1", "/music/20250203_202258.mp3",)
 loadSprite("Ultra Metal", "",)
-loadSprite("SkySanctuary","/sprites/SkySanctuary.jpg")
-loadSprite("ring", "/sprites/Ring.png");
-loadSprite("jumpad", "/sprites/jumpad.png");
-loadSprite("SkySanctuaryLow", "/sprites/SkySanctuaryLow.png");
-loadSprite("grass", "/sprites/grass.png");
-loadSprite("GIANTRING!", "/sprites/giantring.gif");
-loadSprite("Cloud", "/sprites/Cloud.png/");
-volume(7);
-loadSound("ringpickup", "/music/RingPickup.mp3");
-loadSound("blast", "/music/laser_hBUSmJ9.mp3");
-loadSound("Ded", "/music/sonicded.mp3");
-loadSound("jump", "/music/sonicjump.mp3");
 loadSprite("Sonic", "/sprites/sonic.png",
 
 
@@ -45,7 +31,13 @@ loadSprite("Sonic", "/sprites/sonic.png",
             loop: true,
         },
         // This animation only has 1 frame
-        "jump": 8,
+        "jump": {
+            from:9,
+            to: 13,
+            speed: 30,
+            loop: true,
+        },
+
     },
 
 });
@@ -77,7 +69,7 @@ player.onUpdate(() => {
     camPos(player.pos)
 });
 
-const SPEED = 820;
+const SPEED = 10 20;
 
 // .play is provided by sprite() component, it starts playing the specified animation (the animation information of "idle" is defined above in loadSprite)
 player.play("idle");
@@ -136,16 +128,7 @@ Anim: ${player.curAnim()}
 Frame: ${player.frame}
 `.trim();
 
-// Add some text to show the current animation
-const label = add([
-    text(getInfo(), { size: 12 }),
-    color(0, 0, 0),
-    pos(4),
-]);
-
-label.onUpdate(() => {
-    label.text = getInfo();
-});
+////////////////////////////////Bossess?////////////////////////
 const ENEMY_SPEED =360;
 const BULLET_SPEED = 800;
 
@@ -211,6 +194,20 @@ player.onCollide("bullet", (bullet) => {
 
 ////// Levels //////
 
+loadSound("Sky Sanctuary act 1", "/music/20250203_202258.mp3",)
+loadSprite("SkySanctuary","/sprites/SkySanctuary.jpg")
+loadSprite("ring", "/sprites/Ring.png");
+loadSprite("jumpad", "/sprites/jumpad.png");
+loadSprite("SkySanctuaryLow", "/sprites/SkySanctuaryLow.png");
+loadSprite("grass", "/sprites/grass.png");
+loadSprite("GIANTRING!", "/sprites/giantring.gif");
+volume(7);
+loadSound("ringpickup", "/music/RingPickup.mp3");
+loadSound("blast", "/music/laser_hBUSmJ9.mp3");
+loadSound("Ded", "/music/sonicded.mp3");
+loadSound("jump", "/music/sonicjump.mp3");
+loadSprite("Cloud", "/sprites/cloud.png");
+
 setGravity(2400);
 
 const level = addLevel([
@@ -223,13 +220,13 @@ const level = addLevel([
 "=                                                                                                                                       =",
 "=                                                                                                                                       =",
 "=                                                                                                                                       =",
-"=   &                                                                                                                                   =",
+"=                                                                                                                                     =",
+"=   &     &     &     &     &                                                                                                                               =",
 "=                                                                                                                                       =",
 "=                                                                                                                                       =",
 "=                                                                                                                                       =",
 "=                                                                                                                                       =",
-"=                                                                                                                                       =",
-"=  &                                                                                                                                    =",
+"=                                                                                                                                     =",
 "=",
 "=",
 "=",

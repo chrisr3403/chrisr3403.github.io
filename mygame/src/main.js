@@ -250,8 +250,6 @@ const level = addLevel([
 "&  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &",
 
 
-
-
 ], {
     tileWidth: 65,
     tileHeight: 34.1,

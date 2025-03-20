@@ -69,7 +69,7 @@ player.onUpdate(() => {
     camPos(player.pos)
 });
 
-const SPEED = 10 20;
+const SPEED = 1020;
 
 // .play is provided by sprite() component, it starts playing the specified animation (the animation information of "idle" is defined above in loadSprite)
 player.play("idle");
@@ -206,7 +206,7 @@ loadSound("ringpickup", "/music/RingPickup.mp3");
 loadSound("blast", "/music/laser_hBUSmJ9.mp3");
 loadSound("Ded", "/music/sonicded.mp3");
 loadSound("jump", "/music/sonicjump.mp3");
-loadSprite("Cloud", "/sprites/cloud.png");
+loadSprite("Cloud", "/sprites/Cloud.png");
 
 setGravity(2400);
 

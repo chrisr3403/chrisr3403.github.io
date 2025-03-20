@@ -4,14 +4,27 @@ const k = kaboom()
 
 k.onClick(() => k.addKaboom(k.mousePos()))
 
-volume(0.5);
+kaboom({
+    canvas: document.getElementById("game"),
+    background: [10, 100, 200], // RGB values for black background
+});
 
+loadSound("Sky Sanctuary act 1", "/music/20250203_202258.mp3",)
 loadSprite("Ultra Metal", "",)
 loadSprite("SkySanctuary","/sprites/SkySanctuary.jpg")
+loadSprite("ring", "/sprites/Ring.png");
+loadSprite("jumpad", "/sprites/jumpad.png");
+loadSprite("SkySanctuaryLow", "/sprites/SkySanctuaryLow.png");
+loadSprite("grass", "/sprites/grass.png");
+loadSprite("GIANTRING!", "/sprites/giantring.gif");
+volume(7);
+loadSound("ringpickup", "/music/RingPickup.mp3");
+loadSound("blast", "/music/laser_hBUSmJ9.mp3");
+loadSound("Ded", "/music/sonicded.mp3");
+loadSound("jump", "/music/sonicjump.mp3");
+loadSprite("Sonic", "/sprites/sonic.png",
 
-let score = 0;
-
-loadSprite("Sonic", "/sprites/sonic.png", {
+    {
     sliceX: 9,
     // Define animations
     anims: {
@@ -32,19 +45,35 @@ loadSprite("Sonic", "/sprites/sonic.png", {
         // This animation only has 1 frame
         "jump": 8,
     },
+
 });
 
-setGravity(640);
+const music = play("Sky Sanctuary act 1", {
+    loop: true,
+    paused: true,
+});
+
+onKeyPress("p", () => music.paused = !music.paused);
+onKeyPressRepeat("v", () => music.volume += 0.1);
+onKeyPressRepeat("y", () => music.volume -= 0.1);
+onKeyPressRepeat("o", () => music.speed -= 0.1);
+onKeyPressRepeat("r", () => music.speed += 0.1);
+onKeyPress("m", () => music.seek(4.24));
+
+setGravity(50);
 // Add our player character
 const player = add([
     sprite("Sonic"),
-    pos(center()),
+    pos(width() - 0.1, height() - 0.1),
     anchor("bot"),
     area(),
     body(),
     width(100)
 ]);
 
+player.onUpdate(() => {
+    camPos(player.pos)
+});
 
 const SPEED = 820;
 
@@ -130,12 +159,14 @@ const enemy = add([
 // Here we stay "idle" for 0.5 second, then enter "attack" state.
 enemy.onStateEnter("idle", async () => {
     await wait(0.5);
+    play("Blast");
     enemy.enterState("attack");
 });
 
 enemy.onStateEnter("attack", async () => {
     if (player.exists()) {
         const dir = player.pos.sub(enemy.pos).unit();
+
 
         add([
             pos(enemy.pos),
@@ -169,30 +200,43 @@ enemy.onStateUpdate("move", () => {
 player.onCollide("bullet", (bullet) => {
     destroy(bullet);
     destroy(player);
-    play("blast");
+    play("Ded");
     addKaboom(bullet.pos);
 });
-loadSprite("ring", "/sprites/Ring.png");
-loadSprite("jumpad", "/sprites/jumpad.png");
-loadSprite("SkySanctuaryLow", "/sprites/SkySanctuaryLow.png");
-loadSprite("grass", "/sprites/grass.png");
-loadSprite("GIANTRING!", "/sprites/giantring.gif");
-loadSound("ringpickup", "/music/RingPickup.mp3");
-loadSound("blast", "/music/laser_hBUSmJ9.mp3");
-loadSound("jump", "/music/sonicjump.mp3");
 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+////// Levels //////
 
 setGravity(2400);
 
 const level = addLevel([
-
-
-"=             @        $$    $ $ $ $$$$$$$$$$$$$$$$ $$     $       $           $                 $                                    @ =",
-"=========================================================================================================================================",
+"=                                                                                                                                       =",
+"=                                                                                                                                       =",
+"=                                                                                                                                       =",
+"=                                                                                                                                       =",
+"=                                                                                                                                       =",
+"=                                                                                                                                       =",
+"=                                                                                                                                       =",
+"=                                                                                                                                       =",
+"=                                                                                                                                       =",
+"=                                                                                                                                       =",
+"=                                                                                                                                       =",
+"=                                                                                                                                       =",
+"=                                                                                                                                       =",
+"=                                                                                                                                       =",
+"=                                                                                                                                       =",
+"=                                                                                                                                       =",
+"=",
+"=",
+"=",
+"=",
+"=============================================================================================================================================================================================================================================================================================================================================================================================================",
 
 ], {
     tileWidth: 65,
-    tileHeight: 38,
+    tileHeight: 34.1,
     pos: vec2(100, 800),
     tiles: {
         "=": () => [
@@ -206,11 +250,13 @@ const level = addLevel([
             area(),
             body({ isStatic: true }),
             anchor("bot"),
+
         ],
         "$": () => [
             sprite("ring"),
             area(),
             anchor("bot"),
+            pos(width() / 5,height() / 2 + 108),
             "ring",
         ],
         "@": () => [
@@ -224,12 +270,15 @@ const level = addLevel([
             sprite("jumpad"),
             area(),
             anchor("bot"),
+            solid(),
             "jump",
         ],
 
     },
 
 });
+
+
 player.onCollide("GIANTRING!", () => {
     play("GIANTRING");
     if (levelId + 1 < LEVELS.length) {
@@ -274,11 +323,25 @@ player.onCollide("ring", (ring) => {
     play("ringpickup")
 });
 
-player.onUpdate(() => {
-    camPos(player.pos)
+const score = add([
+    text("0", { size: 24 }),
+    pos(24, 24),
+    { value: 0 },
+]);
+
+player.onCollide("coin", (c) => {
+    destroy(c);
+    play("coin");
+    score.value += 1;
+    score.text = score.value.toString();
+    genCoin(c.idx);
 });
 
-const NUM_PLATFORMS = 5;
+
+
+
+
+
 
 
 

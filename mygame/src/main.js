@@ -17,12 +17,14 @@ loadSprite("jumpad", "/sprites/jumpad.png");
 loadSprite("SkySanctuaryLow", "/sprites/SkySanctuaryLow.png");
 loadSprite("grass", "/sprites/grass.png");
 loadSprite("GIANTRING!", "/sprites/giantring.gif");
+loadSprite("Cloud", "/sprites/Cloud.png/");
 volume(7);
 loadSound("ringpickup", "/music/RingPickup.mp3");
 loadSound("blast", "/music/laser_hBUSmJ9.mp3");
 loadSound("Ded", "/music/sonicded.mp3");
 loadSound("jump", "/music/sonicjump.mp3");
 loadSprite("Sonic", "/sprites/sonic.png",
+
 
     {
     sliceX: 9,
@@ -221,13 +223,13 @@ const level = addLevel([
 "=                                                                                                                                       =",
 "=                                                                                                                                       =",
 "=                                                                                                                                       =",
+"=   &                                                                                                                                   =",
 "=                                                                                                                                       =",
 "=                                                                                                                                       =",
 "=                                                                                                                                       =",
 "=                                                                                                                                       =",
 "=                                                                                                                                       =",
-"=                                                                                                                                       =",
-"=                                                                                                                                       =",
+"=  &                                                                                                                                    =",
 "=",
 "=",
 "=",
@@ -238,13 +240,15 @@ const level = addLevel([
     tileWidth: 65,
     tileHeight: 34.1,
     pos: vec2(100, 800),
-    tiles: {
+    tiles:
+    {
         "=": () => [
             sprite("grass"),
             area(),
             body({ isStatic: true }),
             anchor("bot"),
         ],
+
         '-': () => [
             sprite("SkySanctuaryLow"),
             area(),
@@ -272,6 +276,11 @@ const level = addLevel([
             anchor("bot"),
             solid(),
             "jump",
+        ],
+
+        "&": () => [
+            sprite("Cloud"),
+            area(),
         ],
 
     },

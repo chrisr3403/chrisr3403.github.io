@@ -47,7 +47,7 @@ loadSprite("Sonic", "/sprites/sonic.png",
     },
 
 });
-loadSound("Sky Sanctuary act 1", "/music/Zone1.mp3.mp3",)
+loadSound("Sky Sanctuary act 1", "/music/Zone1.mp3",)
 
 const music = play("Sky Sanctuary act 1", {
     loop: true,

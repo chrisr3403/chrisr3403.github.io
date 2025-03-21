@@ -5,9 +5,15 @@ const k = kaboom()
 k.onClick(() => k.addKaboom(k.mousePos()))
 
 kaboom({
+    fullscreen: true,
     canvas: document.getElementById("game"),
     background: [10, 100, 200], // RGB values for black background
 });
+
+// Load assets
+loadSprite("title-bg", "path/to/your/title-background.png");
+loadSound("start", "path/to/your/start-sound.mp3");
+
 loadSprite("Ultra Metal", "",)
 loadSprite("Sonic", "/sprites/sonic.png",
 
@@ -41,6 +47,7 @@ loadSprite("Sonic", "/sprites/sonic.png",
     },
 
 });
+loadSound("Sky Sanctuary act 1", "/music/20250203_202258.mp3",)
 
 const music = play("Sky Sanctuary act 1", {
     loop: true,
@@ -69,7 +76,7 @@ player.onUpdate(() => {
     camPos(player.pos)
 });
 
-const SPEED = 1020;
+const SPEED = 2020;
 
 // .play is provided by sprite() component, it starts playing the specified animation (the animation information of "idle" is defined above in loadSprite)
 player.play("idle");
@@ -194,7 +201,6 @@ player.onCollide("bullet", (bullet) => {
 
 ////// Levels //////
 
-loadSound("Sky Sanctuary act 1", "/music/20250203_202258.mp3",)
 loadSprite("SkySanctuary","/sprites/SkySanctuary.jpg")
 loadSprite("ring", "/sprites/Ring.png");
 loadSprite("jumpad", "/sprites/jumpad.png");
@@ -208,51 +214,18 @@ loadSound("Ded", "/music/sonicded.mp3");
 loadSound("jump", "/music/sonicjump.mp3");
 loadSprite("Cloud", "/sprites/SkySanctuaryClouds.png");
 loadSprite("Cloudv2", "/sprites/Cloud.png");
+loadSprite("ring", "/sprites/Ring.png");
 
 setGravity(2400);
 
 const level = addLevel([
-"=                                                                                                                                       =",
-"=                                                                                                                                       =",
-"=                                                                                                                                       =",
-"=                                                                                                                                       =",
-"=                                                                                                                                       =",
-"=                                                                                                                                       =",
-"=                                                                                                                                       =",
-"=                                                                                                                                       =",
-"=   &  &  &  &  &                                                                                                           =",
-"=   -   -   -   -   -                                                                                                           =",
-"=                                                                                                                                        =",
-"=   &  &  &  &  &                                                                                                                                    =",
-"=                                                                                                                                       =",
-"=                                                                                                                                      =",
-"=   &  &  &  &  &",
-"=   &  &  &  &  &",
-"=   &  &  &  &  &",
-"=",
-"=",
+      "$",
 "=============================================================================================================================================================================================================================================================================================================================================================================================================",
-"&  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &",
-
-
-"&  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &",
-
-
-"&  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &",
-
-
-"&  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &",
-
-
-"&  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &",
-
-
-"&  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &",
 
 
 ], {
-    tileWidth: 65,
-    tileHeight: 34.1,
+    tileWidth: 80,
+    tileHeight: 1,
     pos: vec2(100, 800),
     tiles:
     {
@@ -266,14 +239,11 @@ const level = addLevel([
         '-': () => [
             sprite("Cloudv2"),
             area(),
-            body({ isStatic: true }),
-            anchor("bot"),
         ],
         "$": () => [
             sprite("ring"),
             area(),
             anchor("bot"),
-            pos(width() / 5,height() / 2 + 108),
             "ring",
         ],
         "@": () => [
@@ -298,6 +268,25 @@ const level = addLevel([
 
     },
 
+});
+
+// Create the cloud entity
+const cloud = add([
+    sprite("Cloudv2"),
+    pos(100, 100), // Starting position
+    "cloud",
+]);
+// Define the cloud speed
+const CLOUD_SPEED = 10;
+
+// Update the cloud position
+cloud.action(() => {
+    cloud.move(CLOUD_SPEED,); // Move to the right
+
+    // If the cloud moves off the right side of the screen, reset its position
+    if (cloud.pos.x > width(100, 100)) {
+        cloud.pos.x = -cloud.width;
+    }
 });
 
 

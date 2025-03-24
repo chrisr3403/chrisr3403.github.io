@@ -215,18 +215,24 @@ loadSound("jump", "/music/sonicjump.mp3");
 loadSprite("Cloud", "/sprites/SkySanctuaryClouds.png");
 loadSprite("Cloudv2", "/sprites/Cloud.png");
 loadSprite("ring", "/sprites/Ring.png");
+loadSprite("spike", "/sprites/spike.png");
 
-setGravity(2400);
+setGravity(1400);
 
-const level = addLevel([
-      "$",
-"=============================================================================================================================================================================================================================================================================================================================================================================================================",
+addLevel([
+
+
+    " $  ;  $  ;   $    $  $ ",
+    "========================",
+    "- - - - - - - - - - - - ",
+
+    "========================",
 
 
 ], {
     tileWidth: 80,
     tileHeight: 1,
-    pos: vec2(100, 800),
+    pos: vec2(10, 800),
     tiles:
     {
         "=": () => [
@@ -238,14 +244,9 @@ const level = addLevel([
 
         '-': () => [
             sprite("Cloudv2"),
-            area(),
+            area(100),
         ],
-        "$": () => [
-            sprite("ring"),
-            area(),
-            anchor("bot"),
-            "ring",
-        ],
+
         "@": () => [
             sprite("GIANTRING!"),
             area({ scale: 0.5 }),
@@ -261,34 +262,40 @@ const level = addLevel([
             "jump",
         ],
 
+        "": () => [
+            sprite("ring"),
+            area(),
+            anchor("bot"),
+        ],
+
         "&": () => [
             sprite("Cloud"),
             area(),
+        ],
+        ";": () => [
+            sprite("spike"),
+            area(),
+            anchor("bot"),
+            scale(),
+            "danger",
         ],
 
     },
 
 });
 
-// Create the cloud entity
-const cloud = add([
-    sprite("Cloudv2"),
-    pos(100, 100), // Starting position
-    "cloud",
-]);
-// Define the cloud speed
-const CLOUD_SPEED = 10;
-
-// Update the cloud position
-cloud.action(() => {
-    cloud.move(CLOUD_SPEED,); // Move to the right
-
-    // If the cloud moves off the right side of the screen, reset its position
-    if (cloud.pos.x > width(100, 100)) {
-        cloud.pos.x = -cloud.width;
-    }
+player.onCollide("danger", () => {
+    go("lose");
+    play("Ded")
 });
 
+scene("lose", () => {
+    add([
+        text("You Lose"),
+    ]);
+    onKeyPress("space", () => go("game"));
+    onGamepadButtonPress("south", () => go("game"));
+});
 
 player.onCollide("GIANTRING!", () => {
     play("GIANTRING");
@@ -331,6 +338,8 @@ player.onCollide("jump", () => {
 
 player.onCollide("ring", (ring) => {
     destroy(ring);
+    score.value += 1
+    score.text = "Score:" + score.value
     play("ringpickup")
 });
 
@@ -340,9 +349,9 @@ const score = add([
     { value: 0 },
 ]);
 
-player.onCollide("coin", (c) => {
+player.onCollide("ring", (c) => {
     destroy(c);
-    play("coin");
+    play("ring");
     score.value += 1;
     score.text = score.value.toString();
     genCoin(c.idx);

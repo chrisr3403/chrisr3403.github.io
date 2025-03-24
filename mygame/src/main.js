@@ -76,6 +76,23 @@ player.onUpdate(() => {
     camPos(player.pos)
 });
 
+([
+    health(3),
+])
+
+player.onCollide("spike", (bad) => {
+    player.hurt(1)
+    bad.hurt(1)
+})
+
+player.onCollide("ring", () => {
+    player.heal(1)
+})
+
+player.on("hurt", () => {
+    play("ouch")
+})
+
 const SPEED = 2020;
 
 // .play is provided by sprite() component, it starts playing the specified animation (the animation information of "idle" is defined above in loadSprite)
@@ -220,18 +237,34 @@ loadSprite("spike", "/sprites/spike.png");
 setGravity(1400);
 
 addLevel([
-
-
-    " $  ;  $  ;   $    $  $ ",
-    "========================",
-    "- - - - - - - - - - - - ",
-
-    "========================",
+    "=                                                                       =",
+    "=                                                                       =",
+    "=                                                                       =",
+    "=                                                                       =",
+    "=                                                                       =",
+    "=                                                                       =",
+    "=                                                                       =",
+    "=                                                                       =",
+    "=                                                                       =",
+    "=                                                                       =",
+    "= ^                     $  ;  $  ;   $    $  $ ",
+    "=========================================================================",
+    "-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -",
+    "=                                                                       =",
+    "=                                                                       =",
+    "=                                                                       =",
+    "=                                                                       =",
+    "=                                                                       =",
+    "=                                                                       =",
+    "=                                                                       =",
+    "=                                                                       =",
+    "=                                                                       =",
+    "=                                                                       =",
 
 
 ], {
     tileWidth: 80,
-    tileHeight: 1,
+    tileHeight: 60,
     pos: vec2(10, 800),
     tiles:
     {
@@ -258,7 +291,6 @@ addLevel([
             sprite("jumpad"),
             area(),
             anchor("bot"),
-            solid(),
             "jump",
         ],
 
@@ -293,7 +325,7 @@ scene("lose", () => {
     add([
         text("You Lose"),
     ]);
-    onKeyPress("space", () => go("game"));
+    onKeyPress("e", () => go("game"));
     onGamepadButtonPress("south", () => go("game"));
 });
 
@@ -309,32 +341,21 @@ player.onCollide("GIANTRING!", () => {
         go("win");
     }
 });
-scene("lose", (score) => {
-    add([
-        sprite("Sonic"),
-        pos(width() / 2, height() / 2 - 108),
-        scale(3),
-        anchor("center"),
-    ]);
-
-    // display score
-    add([
-        text(score),
-        pos(width() / 2, height() / 2 + 108),
-        scale(3),
-        anchor("center"),
-    ]);
-
 player.onCollide("jump", () => {
-    player.pos = level.tile2Pos(0, 0);
     play("blast");
 });
 
+player.onCollide("ring", () => {
+    score.value += 1
+    score.text = "Score:" + score.value
+})
+
 // game over scene
     // go back to game with space is pressed
-    onKeyPress("o", () => go("start"));
-    onClick(() => go("start"));
-});
+
+player.onBoost("jump", () => {
+    jump(player)
+})
 
 player.onCollide("ring", (ring) => {
     destroy(ring);

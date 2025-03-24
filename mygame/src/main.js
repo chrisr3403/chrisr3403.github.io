@@ -69,29 +69,13 @@ const player = add([
     anchor("bot"),
     area(),
     body(),
+    health(8),
     width(100)
 ]);
 
 player.onUpdate(() => {
     camPos(player.pos)
 });
-
-([
-    health(3),
-])
-
-player.onCollide("spike", (bad) => {
-    player.hurt(1)
-    bad.hurt(1)
-})
-
-player.onCollide("ring", () => {
-    player.heal(1)
-})
-
-player.on("hurt", () => {
-    play("ouch")
-})
 
 const SPEED = 2020;
 
@@ -242,24 +226,24 @@ addLevel([
     "=                                                                       =",
     "=                                                                       =",
     "=                                                                       =",
+    "=                        $ $                                            =",
+    "=                    ^  =====                                           =",
     "=                                                                       =",
+    "===                                                                     =",
     "=                                                                       =",
-    "=                                                                       =",
-    "=                                                                       =",
-    "=                                                                       =",
-    "= ^                     $  ;  $  ;   $    $  $ ",
-    "=========================================================================",
+    "=        ;     $     $   $  ;  $  ;   $    $  $ ",
+    "====================================================================================================================================================",
     "-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -",
-    "=                                                                       =",
-    "=                                                                       =",
-    "=                                                                       =",
-    "=                                                                       =",
-    "=                                                                       =",
-    "=                                                                       =",
-    "=                                                                       =",
-    "=                                                                       =",
-    "=                                                                       =",
-    "=                                                                       =",
+    "=                                                                                                                                                  =",
+    "=                                                                                                                                                  =",
+    "=                                                                                                                                                  =",
+    "=                                                                                                                                                  =",
+    "=                                                                                                                                                  =",
+    "=                                                                                                                                                  =",
+    "=                                                                                                                                                  =",
+    "=                                                                                                                                                  =",
+    "=                                                                                                                                                  =",
+    "=                                                                                                                                                  =",
 
 
 ], {
@@ -287,17 +271,18 @@ addLevel([
             pos(0, -12),
             "",
         ],
-        "^": () => [
+        "^": () =>[
             sprite("jumpad"),
             area(),
-            anchor("bot"),
-            "jump",
+            "jumpad",
         ],
 
-        "": () => [
+        "$": () => [
             sprite("ring"),
             area(),
+            scale(0.3),
             anchor("bot"),
+            "ring",
         ],
 
         "&": () => [
@@ -308,7 +293,7 @@ addLevel([
             sprite("spike"),
             area(),
             anchor("bot"),
-            scale(),
+            scale(0.3),
             "danger",
         ],
 
@@ -329,40 +314,19 @@ scene("lose", () => {
     onGamepadButtonPress("south", () => go("game"));
 });
 
-player.onCollide("GIANTRING!", () => {
-    play("GIANTRING");
-    if (levelId + 1 < LEVELS.length) {
-        go("game", {
-            levelId: levelId + 1,
-            ring: ring,
-        });
-    }
-    else {
-        go("win");
-    }
-});
-player.onCollide("jump", () => {
+player.onCollide("jumpad", () => {
+    player.jump(1000); // Adjust the jump force as needed
     play("blast");
 });
 
-player.onCollide("ring", () => {
-    score.value += 1
-    score.text = "Score:" + score.value
-})
-
-// game over scene
-    // go back to game with space is pressed
+player.onCollide("ring", (c) => {
+    destroy(c);
+    play("ringpickup");
+});
 
 player.onBoost("jump", () => {
     jump(player)
 })
-
-player.onCollide("ring", (ring) => {
-    destroy(ring);
-    score.value += 1
-    score.text = "Score:" + score.value
-    play("ringpickup")
-});
 
 const score = add([
     text("0", { size: 24 }),
@@ -370,13 +334,6 @@ const score = add([
     { value: 0 },
 ]);
 
-player.onCollide("ring", (c) => {
-    destroy(c);
-    play("ring");
-    score.value += 1;
-    score.text = score.value.toString();
-    genCoin(c.idx);
-});
 
 
 

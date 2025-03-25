@@ -72,6 +72,7 @@ const player = add([
     body(),
     health(8),
     width(100)
+    play(Sky Sanctuary act 1)
 ]);
 
 player.onUpdate(() => {

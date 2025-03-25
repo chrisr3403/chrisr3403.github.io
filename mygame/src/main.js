@@ -7,7 +7,7 @@ k.onClick(() => k.addKaboom(k.mousePos()))
 kaboom({
     fullscreen: true,
     canvas: document.getElementById("game"),
-    background: [10, 100, 200], // RGB values for black background
+    background: [50, 50, 50], // RGB values for black background
 });
 
 // Load assets
@@ -72,7 +72,6 @@ const player = add([
     body(),
     health(8),
     width(100)
-    play(Sky Sanctuary act 1)
 ]);
 
 player.onUpdate(() => {
@@ -220,6 +219,8 @@ loadSprite("Cloudv2", "/sprites/Cloud.png");
 loadSprite("ring", "/sprites/Ring.png");
 loadSprite("spike", "/sprites/spike.png");
 loadSprite("SkyClouds", "/sprites/SkyClouds.png");
+loadSprite("Platform", "/sprites/platform.png");
+loadSprite("Pillar1", "/sprites/pillar.png");
 
 setGravity(1400);
 
@@ -229,21 +230,21 @@ addLevel([
     "*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * ",
     "*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * ",
     "*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * ",
-    "*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * ",
     "                                                                                                                                                              ",
     "                                                                                                                                                              ",
     "                                                                                                                                                              ",
-    "=                                                                       =",
-    "=                                                                       =",
-    "=                                                                       =",
-    "=                        $ $                                            =",
-    "=                 ^     =====                                           =",
-    "=                                                                       =",
+    "                                                                                                                                                              ",
+     "=                                                                       =",
+     "=                                                                       =",
+     "=                                                                       =",
+     "=                        $|$                                            =",
+     "=                 ^       _                                             =",
+     "=                                                                       =",
     "===                                                                     =",
-    "====                                                                    =",
-    "=====        ;     $     $   $  ;  $  ;   $    $  $   ;     $     $   $     $      $    $  $ ;     $     $   $  ;  $  ;   $    $  $                 ",
+    "====",
+    "=====             $   |  $   $    $    | $    $  $      |  $     $   $     $      $    $  $      $     $   $    $     $    $  $                 ",
     "====================================================================================================================================================",
-    "-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -",
+    "=-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -",
     "=                                                                                                                                                  =",
     "=                                                                                                                                                  =",
     "=                                                                                                                                                  =",
@@ -267,11 +268,27 @@ addLevel([
             area(),
             body({ isStatic: true }),
             anchor("bot"),
+
+        ],
+
+        "_": () => [
+            sprite("Platform"),
+            area(),
+            body({ isStatic: true }),
+            anchor("bot"),
+        ],
+
+        "|": () => [
+            sprite("Pillar1"),
+            area(),
+            anchor("bot"),
         ],
 
         '-': () => [
             sprite("Cloudv2"),
             area(100),
+            "danger",
+
         ],
 
         "@": () => [
@@ -305,7 +322,9 @@ addLevel([
         "&": () => [
             sprite("Cloud"),
             area(),
+
         ],
+
         ";": () => [
             sprite("spike"),
             area(),
@@ -350,12 +369,6 @@ const score = add([
     pos(24, 24),
     { value: 0 },
 ]);
-
-
-
-
-
-
 
 
 

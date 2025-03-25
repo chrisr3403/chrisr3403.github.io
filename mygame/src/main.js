@@ -66,7 +66,7 @@ setGravity(50);
 // Add our player character
 const player = add([
     sprite("Sonic"),
-    pos(100,1400),
+    pos(100,1700),
     anchor("bot"),
     area(),
     body(),
@@ -221,6 +221,8 @@ loadSprite("spike", "/sprites/spike.png");
 loadSprite("SkyClouds", "/sprites/SkyClouds NEW.png");
 loadSprite("Platform", "/sprites/platform.png");
 loadSprite("Pillar1", "/sprites/pillar.png");
+loadSprite("RampRight", "/sprites/ramp.png");
+
 
 setGravity(1400);
 
@@ -242,14 +244,14 @@ addLevel([
      "=                                                                      =",
      "=                                                                      =",
      "=                                                                      =",
-     "=                        $|$       $|$                                 =",
-     "=                 ^       _         _                                  =",
+     "=                     $|$       $|$                                                                  $|$       $|$                                 ",
+     "=                 ^    _         _                                                                ^   _         _                                 ",
      "=                                                                      =",
     "===                                                                     =",
     "====",
-    "=====             $   |  $   $    $    | $    $  $      |  $     $   $     $      $    $  $      $     $   $    $     $    $  $                 ",
+    "=====             $   |  $   $    $  ;  | $    $  $    ;    |  $  ;   $   $     $  ;    $    $  $   ;   $     $   $    $  ;  $    $  $               ",
     "====================================================================================================================================================",
-    "=-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -",
+    "=-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - =",
     "=                                                                                                                                                  =",
     "=                                                                                                                                                  =",
     "=                                                                                                                                                  =",
@@ -274,6 +276,13 @@ addLevel([
             body({ isStatic: true }),
             anchor("bot"),
 
+        ],
+
+        "/": () => [
+            sprite("RampRight"),
+            area(),
+            body({ isStatic: true }),
+            anchor("bot"),
         ],
 
         "_": () => [

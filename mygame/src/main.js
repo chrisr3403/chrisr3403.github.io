@@ -213,6 +213,7 @@ volume(4);
 loadSound("ringpickup", "/music/RingPickup.mp3");
 loadSound("blast", "/music/laser_hBUSmJ9.mp3");
 loadSound("Ded", "/music/sonicded.mp3");
+volume(6);
 loadSound("jump", "/music/sonicjump.mp3");
 loadSprite("Cloud", "/sprites/SkySanctuaryClouds.png");
 loadSprite("Cloudv2", "/sprites/Cloud.png");

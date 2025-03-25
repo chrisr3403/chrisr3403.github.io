@@ -215,10 +215,10 @@ loadSound("blast", "/music/laser_hBUSmJ9.mp3");
 loadSound("Ded", "/music/sonicded.mp3");
 loadSound("jump", "/music/sonicjump.mp3");
 loadSprite("Cloud", "/sprites/SkySanctuaryClouds.png");
-loadSprite("Cloudv2", "/sprites/Cloud.png");
+loadSprite("Cloudv2", "/sprites/Cloud NEW.png");
 loadSprite("ring", "/sprites/Ring.png");
 loadSprite("spike", "/sprites/spike.png");
-loadSprite("SkyClouds", "/sprites/SkyClouds.png");
+loadSprite("SkyClouds", "/sprites/SkyClouds NEW.png");
 loadSprite("Platform", "/sprites/platform.png");
 loadSprite("Pillar1", "/sprites/pillar.png");
 
@@ -230,16 +230,21 @@ addLevel([
     "*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * ",
     "*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * ",
     "*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * ",
+    "*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * ",
+    "*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * ",
+    "*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * ",
+    "*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * ",
+    "*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * ",
     "                                                                                                                                                              ",
     "                                                                                                                                                              ",
     "                                                                                                                                                              ",
     "                                                                                                                                                              ",
-     "=                                                                       =",
-     "=                                                                       =",
-     "=                                                                       =",
-     "=                        $|$                                            =",
-     "=                 ^       _                                             =",
-     "=                                                                       =",
+     "=                                                                      =",
+     "=                                                                      =",
+     "=                                                                      =",
+     "=                        $|$       $|$                                 =",
+     "=                 ^       _         _                                  =",
+     "=                                                                      =",
     "===                                                                     =",
     "====",
     "=====             $   |  $   $    $    | $    $  $      |  $     $   $     $      $    $  $      $     $   $    $     $    $  $                 ",

@@ -7,7 +7,7 @@ k.onClick(() => k.addKaboom(k.mousePos()))
 kaboom({
     fullscreen: true,
     canvas: document.getElementById("game"),
-    background: [50, 50, 50], // RGB values for black background
+    background: [0, 0, 0], // RGB values for black background
 });
 
 // Load assets
@@ -235,12 +235,12 @@ addLevel([
     "*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * ",
     "*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * ",
     "*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * ",
-    "                                                                      $                                                                                       ",
-    "                                                                _     _                                                                                       ",
+    "                                                                         $                                                                                    ",
+    "                                                                   _     _                                                                                    ",
     "                                                                                                                                                              ",
-    "                                                                                                                                                              ",
-    "                                                                                                                                                              ",
-    "                                                            ^                                                                                                 ",
+    "                                                                                                                                                            ",
+    "                                                               ^                                                                                                ",
+    "                                                                                                                                                             ",
      "=                                                                                                                                                            ",
      "=                                                                                                                                                            ",
      "=                                                                                                                                                            ",

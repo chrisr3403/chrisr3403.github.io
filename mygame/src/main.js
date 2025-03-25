@@ -47,6 +47,7 @@ loadSprite("Sonic", "/sprites/sonic.png",
     },
 
 });
+volume(0.1)
 loadSound("Sky Sanctuary act 1", "/music/Zone1.mp3",)
 
 const music = play("Sky Sanctuary act 1", {
@@ -65,7 +66,7 @@ setGravity(50);
 // Add our player character
 const player = add([
     sprite("Sonic"),
-    pos(width() - 0.1, height() - 0.1),
+    pos(100,1400),
     anchor("bot"),
     area(),
     body(),
@@ -208,7 +209,7 @@ loadSprite("jumpad", "/sprites/jumpad.png");
 loadSprite("SkySanctuaryLow", "/sprites/SkySanctuaryLow.png");
 loadSprite("grass", "/sprites/grass.png");
 loadSprite("GIANTRING!", "/sprites/giantring.gif");
-volume(7);
+volume(4);
 loadSound("ringpickup", "/music/RingPickup.mp3");
 loadSound("blast", "/music/laser_hBUSmJ9.mp3");
 loadSound("Ded", "/music/sonicded.mp3");
@@ -217,21 +218,29 @@ loadSprite("Cloud", "/sprites/SkySanctuaryClouds.png");
 loadSprite("Cloudv2", "/sprites/Cloud.png");
 loadSprite("ring", "/sprites/Ring.png");
 loadSprite("spike", "/sprites/spike.png");
+loadSprite("SkyClouds", "/sprites/SkyClouds.png");
 
 setGravity(1400);
 
 addLevel([
-    "=                                                                       =",
-    "=                                                                       =",
+    "*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * ",
+    "*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * ",
+    "*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * ",
+    "*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * ",
+    "*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * ",
+    "*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * ",
+    "                                                                                                                                                              ",
+    "                                                                                                                                                              ",
+    "                                                                                                                                                              ",
     "=                                                                       =",
     "=                                                                       =",
     "=                                                                       =",
     "=                        $ $                                            =",
-    "=                    ^  =====                                           =",
+    "=                 ^     =====                                           =",
     "=                                                                       =",
     "===                                                                     =",
-    "=                                                                       =",
-    "=        ;     $     $   $  ;  $  ;   $    $  $ ",
+    "====                                                                    =",
+    "=====        ;     $     $   $  ;  $  ;   $    $  $   ;     $     $   $     $      $    $  $ ;     $     $   $  ;  $  ;   $    $  $                 ",
     "====================================================================================================================================================",
     "-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -",
     "=                                                                                                                                                  =",
@@ -248,7 +257,7 @@ addLevel([
 
 ], {
     tileWidth: 80,
-    tileHeight: 60,
+    tileHeight: 50,
     pos: vec2(10, 800),
     tiles:
     {
@@ -271,9 +280,16 @@ addLevel([
             pos(0, -12),
             "",
         ],
+
+        '*': () => [
+            sprite("SkyClouds"),
+            area(100),
+
+        ],
         "^": () =>[
             sprite("jumpad"),
             area(),
+            scale(0.85),
             "jumpad",
         ],
 
@@ -293,7 +309,7 @@ addLevel([
             sprite("spike"),
             area(),
             anchor("bot"),
-            scale(0.3),
+            scale(0.5),
             "danger",
         ],
 

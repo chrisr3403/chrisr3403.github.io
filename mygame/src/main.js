@@ -47,7 +47,7 @@ loadSprite("Sonic", "/sprites/sonic.png",
 
 });
 volume(0.1)
-loadSound("Sky Sanctuary act 1", "/music/Zone1.mp3",)
+loadSound("Sky Sanctuary act 1", "/music/SkySanctuary.mp3",)
 
 const music = play("Sky Sanctuary act 1", {
     loop: true,
@@ -202,17 +202,13 @@ player.onCollide("bullet", (bullet) => {
 
 ////// Levels //////
 
-loadSprite("SkySanctuary","/sprites/SkySanctuary.jpg")
-loadSprite("ring", "/sprites/Ring.png");
-loadSprite("jumpad", "/sprites/jumpad.png");
-loadSprite("SkySanctuaryLow", "/sprites/SkySanctuaryLow.png");
-loadSprite("grass", "/sprites/grass.png");
-loadSprite("GIANTRING!", "/sprites/giantring.gif");
+
 volume(2);
 loadSound("ringpickup", "/music/RingPickup.mp3");
 loadSound("blast", "/music/laser_hBUSmJ9.mp3");
 loadSound("Ded", "/music/sonicded.mp3");
 loadSound("jump", "/music/sonicjump.mp3");
+loadSound("Win", "/music/sonicjump.mp3");
 loadSprite("Cloud", "/sprites/SkySanctuaryClouds.png");
 loadSprite("Cloudv2", "/sprites/Cloud NEW.png");
 loadSprite("ring", "/sprites/Ring.png");
@@ -221,6 +217,12 @@ loadSprite("SkyClouds", "/sprites/SkyClouds NEW.png");
 loadSprite("Platform", "/sprites/platform.png");
 loadSprite("Pillar1", "/sprites/pillar.png");
 loadSprite("RampRight", "/sprites/ramp.png");
+loadSprite("SkySanctuary","/sprites/SkySanctuary.jpg")
+loadSprite("ring", "/sprites/Ring.png");
+loadSprite("jumpad", "/sprites/jumpad.png");
+loadSprite("SkySanctuaryLow", "/sprites/SkySanctuaryLow.png");
+loadSprite("grass", "/sprites/grass.png");
+loadSprite("GIANTRING!", "/sprites/giantring.gif");
 
 
 setGravity(1400);
@@ -234,8 +236,7 @@ addLevel([
      "=                                                                                                                                                          ",
      "=                                                                                                                                                          ",
      "=                                                                                                                                                          ",
-     "=                                                                                                                                                         ===========   ",
-     "=                     $|$       $|$                        $   _   $                                       $|$       $|$                                  =",
+     "=                     $|$       $|$                        $   _   $                                       $|$       $|$                                  ============================================================================================================================================================== !",
      "=                 ^    _         _    ^                ^   _       _   ^                               ^    _         _     ^                          ^  =",
      "=                                                                                                                                                         =",
     "===                                                                                                                                                       =",
@@ -290,20 +291,12 @@ addLevel([
         ],
 
         '-': () => [
-            sprite("Cloudv2",),
+        sprite("Cloudv2",),
         anchor("top"),
         area(),
         z(1000),
        "danger",
 
-        ],
-
-        "@": () => [
-            sprite("GIANTRING!"),
-            area({ scale: 0.5 }),
-            anchor("bot"),
-            pos(0, -12),
-            "",
         ],
 
         '*': () => [
@@ -339,6 +332,14 @@ addLevel([
             scale(0.5),
             "danger",
         ],
+        "!": () => [
+            sprite("GIANTRING!"),
+            area(),
+            anchor("bot"),
+            scale(0.5),
+            "win",
+        ],
+
 
     },
 
@@ -355,6 +356,20 @@ scene("lose", () => {
     ]);
     onKeyPress("e", () => go("game"));
     onGamepadButtonPress("south", () => go("game"));
+});
+
+
+player.onCollide("win", () => {
+    go("win");
+    play("Ded")
+});
+
+scene("win", () => {
+    add([
+        text("You Win"),
+    ]);
+    onKeyPress("e", () => go("game"));
+    onGamepadButtonPress("o", () => go("game"));
 });
 
 player.onCollide("jumpad", () => {

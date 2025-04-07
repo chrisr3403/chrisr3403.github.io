@@ -16,7 +16,6 @@ loadSprite("SuperSonic", "/sprites/SuperSonic.png",)
 loadSprite("Ultra Metal", "Ultra Metal Sonic.png",)
 loadSprite("Sonic", "/sprites/sonic.png",
 
-
     {
     sliceX: 9,
     // Define animations
@@ -59,10 +58,13 @@ function swapPlayerSprite() {
     player.use(sprite("SuperSonic"));
 }
 
+loadSound("SuperSonicM", "/music/22. Super Sonic.mp3",)
+
+
 onKeyPress("s", () => {
     swapPlayerSprite();
+    play("SuperSonicM")
 });
-
 
 onKeyPress("p", () => music.paused = !music.paused);
 onKeyPressRepeat("v", () => music.volume += 0.1);
@@ -84,7 +86,6 @@ const player = add([
 ]);
 
 loadSprite("SuperSonic", "/sprites/SuperSonic.png",
-
 {
     sliceX: 9,
     // Define animations

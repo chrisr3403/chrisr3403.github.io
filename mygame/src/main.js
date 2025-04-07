@@ -56,6 +56,7 @@ const music = play("Sky Sanctuary act 1", {
 
 function swapPlayerSprite() {
     player.use(sprite("SuperSonic"));
+
 }
 
 loadSound("SuperSonicM", "/music/22. Super Sonic.mp3",)

@@ -13,9 +13,8 @@ kaboom({
 loadSprite("title-bg", "path/to/your/title-background.png");
 loadSound("start", "path/to/your/start-sound.mp3");
 
-loadSprite("Ultra Metal", "",)
+loadSprite("Ultra Metal", "Ultra Metal Sonic.png",)
 loadSprite("Sonic", "/sprites/sonic.png",
-
 
     {
     sliceX: 9,
@@ -231,8 +230,8 @@ addLevel([
      "=                                                                         $                                                                                ",
      "=                                                                   _     _                                                                                ",
      "=                                                                                                                                                          ",
+     "=                                                             ^                                                                                           ",
      "=                                                                                                                                                          ",
-     "=                                                                ^                                                                                         ",
      "=                                                                                                                                                          ",
      "=                                                                                                                                                          ",
      "=                                                                                                                                                          ",
@@ -407,6 +406,11 @@ function spawnCloud() {
     wait(rand(6, 12), spawnCloud);
 }
 
+function swapPlayerSprite() {
+    player.use(sprite("Ultra Metal"));
+}
 
-
+onKeyPress("s", () => {
+    swapPlayerSprite();
+});
 

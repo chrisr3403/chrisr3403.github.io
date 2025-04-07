@@ -61,8 +61,8 @@ function swapPlayerSprite() {
 
 onKeyPress("s", () => {
     swapPlayerSprite();
-    speed(100)
 });
+
 
 onKeyPress("p", () => music.paused = !music.paused);
 onKeyPressRepeat("v", () => music.volume += 0.1);
@@ -113,14 +113,6 @@ loadSprite("SuperSonic", "/sprites/SuperSonic.png",
 
     },
 
-});
-
-    player.use(sprite("SuperSonic"));
-
-
-onKeyPress("s", () => {
-    swapPlayerSprite();
-    speed(100)
 });
 
 player.onUpdate(() => {

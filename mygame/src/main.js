@@ -12,9 +12,10 @@ kaboom({
 // Load assets
 loadSprite("title-bg", "path/to/your/title-background.png");
 loadSound("start", "path/to/your/start-sound.mp3");
-
+loadSprite("SuperSonic", "/sprites/SuperSonic.png",)
 loadSprite("Ultra Metal", "Ultra Metal Sonic.png",)
 loadSprite("Sonic", "/sprites/sonic.png",
+
 
     {
     sliceX: 9,
@@ -45,6 +46,7 @@ loadSprite("Sonic", "/sprites/sonic.png",
     },
 
 });
+
 volume(0.1)
 loadSound("Sky Sanctuary act 1", "/music/SkySanctuary.mp3",)
 
@@ -54,11 +56,12 @@ const music = play("Sky Sanctuary act 1", {
 });
 
 function swapPlayerSprite() {
-    player.use(sprite("Ultra Metal"));
+    player.use(sprite("SuperSonic"));
 }
 
 onKeyPress("s", () => {
     swapPlayerSprite();
+    speed(100)
 });
 
 onKeyPress("p", () => music.paused = !music.paused);
@@ -79,6 +82,46 @@ const player = add([
     health(8),
     width(100)
 ]);
+
+loadSprite("SuperSonic", "/sprites/SuperSonic.png",
+
+{
+    sliceX: 9,
+    // Define animations
+    anims: {
+        "idle": {
+            // Starts from frame 0, ends at frame 3
+            from:0,
+            to: 4,
+            // Frame per second
+            speed: 1,
+            loop: true,
+        },
+        "run": {
+            from:5,
+            to: 8,
+            speed: 30,
+            loop: true,
+        },
+        // This animation only has 1 frame
+        "jump": {
+            from:9,
+            to: 13,
+            speed: 30,
+            loop: true,
+        },
+
+    },
+
+});
+
+    player.use(sprite("SuperSonic"));
+
+
+onKeyPress("s", () => {
+    swapPlayerSprite();
+    speed(100)
+});
 
 player.onUpdate(() => {
     camPos(player.pos)

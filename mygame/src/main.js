@@ -100,7 +100,7 @@ loadSprite("SuperSonic", "/sprites/SuperSonic.png",
             loop: true,
         },
         "run": {
-            from:5,
+            from:4,
             to: 8,
             speed: 30,
             loop: true,

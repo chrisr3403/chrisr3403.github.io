@@ -83,7 +83,7 @@ const player = add([
 
 loadSprite("SuperSonic", "/sprites/SuperSonic.png",
 {
-    sliceX: 1,
+    sliceX: 9,
     // Define animations
     anims: {
         "idle": {

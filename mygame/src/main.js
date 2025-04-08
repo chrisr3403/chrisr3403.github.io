@@ -17,33 +17,33 @@ loadSprite("Ultra Metal", "Ultra Metal Sonic.png",)
 loadSprite("Sonic", "/sprites/sonic.png",
 
     {
-    sliceX: 9,
+    sliceX: 11,
     // Define animations
     anims: {
         "idle": {
             // Starts from frame 0, ends at frame 3
             from:0,
-            to: 4,
+            to: 3,
             // Frame per second
             speed: 1,
             loop: true,
         },
         "run": {
             from:5,
-            to: 8,
+            to: 4,
             speed: 30,
             loop: true,
         },
         // This animation only has 1 frame
         "jump": {
-            from:6,
-            to: 6,
+            from:8,
+            to: 8,
             speed: 30,
             loop: true,
         },
         "super": {
-            from:8,
-            to: 8,
+            from:9,
+            to: 9,
             speed: 30,
             loop: false,
         },
@@ -78,8 +78,17 @@ const player = add([
     area(),
     body(),
     health(8),
-    width(100)
+    scale(1.5)
 ]);
+
+onKeyPress("space", () => {
+    player.move(-SPEED, 2);
+    player.flipX = true;
+    // .play() will reset to the first frame of the anim, so we want to make sure it only runs when the current animation is not "run"
+    if (player.isGrounded() && player.curAnim() !== "jump") {
+        player.play("jump");
+    }
+});
 
 loadSprite("SuperSonic", "/sprites/SuperSonic.png",
 {
@@ -102,9 +111,9 @@ loadSprite("SuperSonic", "/sprites/SuperSonic.png",
         },
         // This animation only has 1 frame
         "jump": {
-            from:9,
-            to: 13,
-            speed: 30,
+            from:5,
+            to: 8,
+            speed: 8,
             loop: true,
         },
 
@@ -120,7 +129,6 @@ function swapPlayerSprite() {
 }
 
 loadSound("SuperSonicM", "/music/14 - The Doomsday Zone - Tatsuyuki Maeda, Sachio Ogawa, Masanori Hikichi.mp3",)
-
 
 onKeyPress("s", () => {
     swapPlayerSprite();

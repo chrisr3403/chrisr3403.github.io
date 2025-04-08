@@ -36,8 +36,8 @@ loadSprite("Sonic", "/sprites/sonic.png",
         },
         // This animation only has 1 frame
         "jump": {
-            from:9,
-            to: 13,
+            from:8,
+            to: 8,
             speed: 30,
             loop: true,
         },
@@ -142,6 +142,7 @@ player.onGround(() => {
 onKeyPress("space", () => {
     if (player.isGrounded()) {
         player.jump();
+        player.play("jump");
         play("jump");
     }
 });
@@ -319,7 +320,7 @@ addLevel([
             sprite("grass"),
             area(),
             body({ isStatic: true }),
-            anchor(""),
+            anchor("bot"),
             "game"
 
         ],

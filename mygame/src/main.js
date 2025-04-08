@@ -82,7 +82,6 @@ const player = add([
 ]);
 
 onKeyPress("space", () => {
-    player.move(-SPEED, 2);
     player.flipX = true;
     // .play() will reset to the first frame of the anim, so we want to make sure it only runs when the current animation is not "run"
     if (player.isGrounded() && player.curAnim() !== "jump") {
@@ -121,6 +120,7 @@ loadSprite("SuperSonic", "/sprites/SuperSonic.png",
 
 });
 
+
 function swapPlayerSprite() {
     scale(100)
     player.use(sprite("SuperSonic"));
@@ -140,7 +140,7 @@ player.onUpdate(() => {
     camPos(player.pos)
 });
 
-const SPEED = 2020;
+const SPEED = 500;
 
 // .play is provided by sprite() component, it starts playing the specified animation (the animation information of "idle" is defined above in loadSprite)
 player.play("idle");
@@ -152,7 +152,7 @@ player.onGround(() => {
     }
     else {
         player.play("run");
-    }
+    }.
 });
 
 onKeyPress("space", () => {
@@ -274,7 +274,6 @@ loadSound("jump", "/music/sonicjump.mp3");
 loadSound("Win", "/music/sonicjump.mp3");
 loadSprite("Cloud", "/sprites/SkySanctuaryClouds.png");
 loadSprite("Cloudv2", "/sprites/Cloud NEW.png");
-loadSprite("ring", "/sprites/Ring.png");
 loadSprite("spike", "/sprites/spike.png");
 loadSprite("SkyClouds", "/sprites/SkyClouds NEW.png");
 loadSprite("Platform", "/sprites/platform.png");
@@ -287,7 +286,23 @@ loadSprite("SkySanctuaryLow", "/sprites/SkySanctuaryLow.png");
 loadSprite("grass", "/sprites/grass.png");
 loadSprite("GIANTRING!", "/sprites/giantring.gif");
 loadSound("Win", "/music/sonicWin.mp3");
+loadSprite("ring", "/sprites/Ring.png"
+{
+    sliceX: 9,
+    // Define animations
+    anims: {
+        "idle": {
+            // Starts from frame 0, ends at frame 3
+            from:0,
+            to: 4,
+            // Frame per second
+            speed: 2,
+            loop: true,
+        },
 
+    },
+
+});
 
 setGravity(1400);
 

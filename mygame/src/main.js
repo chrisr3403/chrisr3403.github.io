@@ -36,10 +36,16 @@ loadSprite("Sonic", "/sprites/sonic.png",
         },
         // This animation only has 1 frame
         "jump": {
+            from:6,
+            to: 6,
+            speed: 30,
+            loop: true,
+        },
+        "super": {
             from:8,
             to: 8,
             speed: 30,
-            loop: true,
+            loop: false,
         },
 
     },
@@ -54,21 +60,7 @@ const music = play("Sky Sanctuary act 1", {
     paused: true,
 });
 
-function swapPlayerSprite() {
-    scale(100)
-    player.use(sprite("SuperSonic"));
-    player.scale = vec2(2)
 
-}
-
-loadSound("SuperSonicM", "/music/14 - The Doomsday Zone - Tatsuyuki Maeda, Sachio Ogawa, Masanori Hikichi.mp3",)
-
-
-onKeyPress("s", () => {
-    swapPlayerSprite();
-    scale(100)
-    play("SuperSonicM")
-});
 
 onKeyPress("p", () => music.paused = !music.paused);
 onKeyPressRepeat("v", () => music.volume += 0.1);
@@ -91,7 +83,7 @@ const player = add([
 
 loadSprite("SuperSonic", "/sprites/SuperSonic.png",
 {
-    sliceX: 9,
+    sliceX: 1,
     // Define animations
     anims: {
         "idle": {
@@ -120,6 +112,22 @@ loadSprite("SuperSonic", "/sprites/SuperSonic.png",
 
 });
 
+function swapPlayerSprite() {
+    scale(100)
+    player.use(sprite("SuperSonic"));
+    player.scale = vec2(2)
+
+}
+
+loadSound("SuperSonicM", "/music/14 - The Doomsday Zone - Tatsuyuki Maeda, Sachio Ogawa, Masanori Hikichi.mp3",)
+
+
+onKeyPress("s", () => {
+    swapPlayerSprite();
+    scale(100)
+    play("SuperSonicM")
+});
+
 player.onUpdate(() => {
     camPos(player.pos)
 });
@@ -142,7 +150,6 @@ player.onGround(() => {
 onKeyPress("space", () => {
     if (player.isGrounded()) {
         player.jump();
-        player.play("jump");
         play("jump");
     }
 });

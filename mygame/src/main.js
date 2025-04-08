@@ -55,7 +55,9 @@ const music = play("Sky Sanctuary act 1", {
 });
 
 function swapPlayerSprite() {
+    scale(100)
     player.use(sprite("SuperSonic"));
+    player.scale = vec2(2)
 
 }
 
@@ -64,6 +66,7 @@ loadSound("SuperSonicM", "/music/22. Super Sonic.mp3",)
 
 onKeyPress("s", () => {
     swapPlayerSprite();
+    scale(100)
     play("SuperSonicM")
 });
 
@@ -100,7 +103,7 @@ loadSprite("SuperSonic", "/sprites/SuperSonic.png",
             loop: true,
         },
         "run": {
-            from:4,
+            from:5,
             to: 8,
             speed: 30,
             loop: true,
@@ -437,25 +440,33 @@ player.onBoost("jump", () => {
     jump(player)
 })
 
-const score = add([
-    text("0", { size: 24 }),
-    pos(24, 24),
-    { value: 0 },
+let score = 0;
+
+const scoreLabel = add([
+    text(score),
+    pos(12, 12),
+    layer('ui'),
+    {
+        value: score,
+    },
 ]);
 
-function spawnCloud() {
-    const dir = choose([LEFT, RIGHT]);
-
-    add([
-        sprite("cloud", { flipX: dir.eq(LEFT) }),
-        move(dir, rand(20, 60)),
-        offscreen({ destroy: true }),
-        anchor("top"),
-        area(),
-        z(1000),
-    ]);
-
-    wait(rand(6, 12), spawnCloud);
+function increaseScore(points) {
+    scoreLabel.value += points;
+    scoreLabel.text = scoreLabel.value;
 }
+
+// Example: Increase score by 10 points when a player collects an item
+action('collectible', (c) => {
+    destroy(c);
+    increaseScore(10);
+});
+
+// Add a collectible item for demonstration
+add([
+    sprite('coin'),
+    pos(100, 100),
+    'collectible',
+]);
 
 

@@ -6,22 +6,16 @@ k.onClick(() => k.addKaboom(k.mousePos()))
 
 kaboom({
     fullscreen: true,
-    background: [70, 70, 100], // RGB values for black background
+    background: [50, 15, 244], // RGB values for black background
 });
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ////// Levels //////
 
-
-volume(2);
-loadSound("ringpickup", "/music/RingPickup.mp3");
-loadSound("blast", "/music/laser_hBUSmJ9.mp3");
+volume(3);
 loadSound("Ded", "/music/sonicded.mp3");
 loadSound("jump", "/music/sonicjump.mp3");
-loadSound("Win", "/music/sonicjump.mp3");
-loadSprite("Cloud", "/sprites/SkySanctuaryClouds.png");
-loadSprite("Cloudv2", "/sprites/Cloud NEW.png");
 loadSprite("spike", "/sprites/spike.png");
 loadSprite("SkyClouds", "/sprites/SkyClouds NEW.png");
 loadSprite("Platform", "/sprites/platform.png");
@@ -34,32 +28,44 @@ loadSprite("jumpad", "/sprites/jumpad.png");
 loadSprite("SkySanctuaryLow", "/sprites/SkySanctuaryLow.png");
 loadSprite("grass", "/sprites/grass.png");
 loadSprite("GIANTRING!", "/sprites/giantring.gif");
-loadSound("Win", "/music/sonicWin.mp3");
+loadSound("Win", "/music/29-Act Cleared.mp3");
 loadSprite("ring", "/sprites/Ring2.png")
 loadSprite("DrRobotnik", "/sprites/Eggman.png")
 loadSprite("WinFlag", "/sprites/SonicWin.png")
+loadSprite("Cloud", "/sprites/SkySanctuaryClouds.png");
+loadSprite("Cloudv2", "/sprites/Cloud NEW.png");
+loadSprite("jumpad", "/sprites/jumpad.png");
+loadSound("blast", "/music/laser_hBUSmJ9.mp3");
+
 
 addLevel([
+
+     "                                                                                                                    ",
+     "                                                                                                                    ",
+     "                                                                                                                    ",
+     "                                                                                                                    ",
      "************************************************************************************************************************************************",
      "                                                                                                                    ",
      "                                                                                                                    ",
      "                                                                                                                    ",
-"~",  "~                                                                                                                   ",
+"~",  "~                                                                                                                  ",
      "                                                                                                                    ",
      "                                                                                                                    ",
      "~                                                                                                                   ",
-     "                                                                                             $                      ",
      "                                                                                             _                      ",
-     "~                                                                                                                   ",
-     "                                                                               $    ;   $   ;   $   ;   $    ;   $  ",
-     "       $            $              $                                        ========================================",
-     "       _            _              _                               ^                                           ",
-     "~                                                                                                                   ",
-     "                                                                                                                    ",
-     "                                                                                                                      $      ;   $         !",
-     "                  $$$$     ;    $$    ;    $$   ;     $4      $$$   $                                                =======================",
-     "~=======================================================================",
-              "#"
+     "~                                            #                 #                                                                  ",
+     "          #     #                #                    #                           $   # ;   $   ;   $  # ;   $    ;   $  ",
+     "      $|$          $|$           $|$                                        ========================================",
+     "       _            _             _                               ^         #                                                               ",
+     "~                                                                                                                                           ",
+     "                                                                                                                                            ",
+     "**********************************************************************************************************************$      ;   $         !",
+     "                  $$$$     ;    $$    ;    $$   ;     $4      $$$                                                    =======================",
+     "~=======================================================================--------",
+"************************************************************************************************************************************************",
+"************************************************************************************************************************************************",
+"                                                                                                                                                ",
+"                                                                                                                                                ",
 
 ], {
     tileWidth: 80,
@@ -67,6 +73,13 @@ addLevel([
     pos: vec2(10, 800),
     tiles:
     {
+        "=": () => [
+            sprite("grass"),
+            area(),
+            body({ isStatic: true }),
+            anchor("bot"),
+            "game"
+        ],
 
         "/": () => [
             sprite("RampRight"),
@@ -95,39 +108,7 @@ addLevel([
             anchor("bot"),
         ],
 
-        '-': () => [
-        sprite("Cloudv2",),
-        anchor("top"),
-        area(),
-        z(1000),
-       "danger",
 
-        ],
-
-        "#": () =>[
-            sprite("Cloudv2",),
-            area(),
-            scale(100),
-        ],
-        "=": () => [
-            sprite("grass"),
-            area(),
-            body({ isStatic: true }),
-            anchor("bot"),
-            "game"
-
-        ],
-        '*': () => [
-            sprite("SkyClouds"),
-            area(100),
-
-        ],
-        "^": () =>[
-            sprite("jumpad"),
-            area(),
-            scale(0.85),
-            "jumpad",
-        ],
 
         "$": () => [
             sprite("ring"),
@@ -158,10 +139,37 @@ addLevel([
             "win",
         ],
 
+        '-': () => [
+        sprite("Cloudv2",),
+        anchor("top"),
+        area(),
+        z(1000),
+       "danger",
+
+    ],
+    '*': () => [
+        sprite("SkyClouds"),
+        area(100),
+        ],
+
+        "#": () =>[
+            sprite("Cloudv2",),
+            area(),
+            scale(2),
+        ],
+
+        "^": () =>[
+            sprite("jumpad"),
+            area(),
+            scale(0.85),
+            "jumpad",
+        ],
 
     },
 
 });
+
+/////////////////////////////////////////////Sonicdef_p///////////////////////////////////////////////
 
 // Load assets
 loadSprite("title-bg", "path/to/your/title-background.png");
@@ -273,7 +281,7 @@ player.onAnimEnd((anim) => {
 });
 
 onKeyDown("left", () => {
-    player.move(-SPEED, 2);
+    player.move(-SPEED, 4);
     player.flipX = true;
     // .play() will reset to the first frame of the anim, so we want to make sure it only runs when the current animation is not "run"
     if (player.isGrounded() && player.curAnim() !== "run") {
@@ -282,7 +290,7 @@ onKeyDown("left", () => {
 });
 
 onKeyDown("right", () => {
-    player.move(SPEED, 2);
+    player.move(SPEED, 4);
     player.flipX = false;
     if (player.isGrounded() && player.curAnim() !== "run") {
         player.play("run");
@@ -328,6 +336,17 @@ loadSprite("SuperSonic", "/sprites/SuperSonic.png",
 
     });
 
+    function spawnParticles(x, y) {
+        for (let i = 0; i < 10; i++) {
+            add([
+                pos(x, y),
+                rect(4, 4),
+                color(rand(0, 255), rand(0, 255), rand(0, 255)),
+                lifespan(100, { fade: 0.1 }),
+                move(rand(0, 360), rand(50, 100)),
+            ]);
+        }
+    }
 
     function swapPlayerSprite() {
         scale(1000)
@@ -343,35 +362,13 @@ loadSprite("SuperSonic", "/sprites/SuperSonic.png",
         swapPlayerSprite();
         scale(1000)
         setGravity(500);
-        player.speed += 5000;
+        spawnParticles(player.pos.x, player.pos.y);
+        loop(0.5, spawnParticles);
         play("SuperSonicM")
 
     });
 
-    onKeyDown("left", () => {
-        player.move(-SPEED, 2);
-        player.flipX = true;
-        // .play() will reset to the first frame of the anim, so we want to make sure it only runs when the current animation is not "run"
-        if (player.isGrounded() && player.curAnim() !== "run") {
-            player.play("run");
-        }
-    });
 
-    onKeyDown("right", () => {
-        player.move(SPEED, 3);
-        player.flipX = false;
-        if (player.isGrounded() && player.curAnim() !== "run") {
-            player.play("run");
-        }
-    });
-    ["left", "right"].forEach((key) => {
-        onKeyRelease(key, () => {
-            // Only reset to "idle" if player is not holding any of these keys
-            if (player.isGrounded() && !isKeyDown("left") && !isKeyDown("right")) {
-                player.play("idle");
-            }
-        });
-    });
 
 const getInfo = () =>
     `
@@ -403,35 +400,18 @@ scene("win", () => {
 
 
 player.onCollide("jumpad", () => {
-    player.jump(1300); // Adjust the jump force as needed
+    player.jump(1800); // Adjust the jump force as needed
     play("blast");
 });
 
+loadSound("ringpickup", "/music/RingPickup.mp3");
+
+
 player.onCollide("ring", (ring) => {
-    destroy(ring);
     play("ringpickup")
+    destroy(ring);
     // You can also add other actions here, like increasing the score
 });
-
-function spawnTree() {
-
-    // add tree obj
-    add([
-        rect(48, rand(32, 96)),
-        area(),
-        outline(4),
-        pos(width(), height() - FLOOR_HEIGHT),
-        anchor("botleft"),
-        color(238, 143, 203),
-        move(LEFT, SPEED),
-        offscreen({ destroy: true }),
-        "tree",
-    ])
-
-    // wait a random amount of time to spawn next tree
-    wait(rand(0.5, 1.5), spawnTree)
-
-}
 
 player.onCollide("danger", () => {
     go("lose");
@@ -455,4 +435,21 @@ scene("lose", (score) => {
 	])
 
 });
+
+
+let score = 0
+
+const scoreLabel = add([
+    text(score),
+    pos(10, 800),
+])
+
+// increment score every frame
+onUpdate(() => {
+    score++
+    scoreLabel.text = score
+})
+
+
+
 

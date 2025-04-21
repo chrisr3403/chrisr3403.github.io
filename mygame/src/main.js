@@ -188,7 +188,6 @@ addLevel([
 // Load assets
 loadSprite("title-bg", "path/to/your/title-background.png");
 loadSound("start", "path/to/your/start-sound.mp3");
-loadSprite("SuperSonic", "/sprites/SuperSonic.png",)
 loadSprite("Ultra Metal", "Ultra Metal Sonic.png",)
 loadSprite("Sonic", "/sprites/sonic.png",
 
@@ -376,6 +375,7 @@ loadSprite("SuperSonic", "/sprites/SuperSonic.png",
         swapPlayerSprite();
         scale(1000)
         setGravity(500);
+        (SPEED, 50);
         spawnParticles(player.pos.x, player.pos.y);
         loop(0.5, spawnParticles);
         play("SuperSonicM")

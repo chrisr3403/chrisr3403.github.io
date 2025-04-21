@@ -334,7 +334,7 @@ loadSound("Sky Sanctuary act 1", "/music/SkySanctuary.mp3",)
 
 const music = play("Sky Sanctuary act 1", {
     loop: true,
-    paused: true,
+    paused: false,
 });
 
 onKeyPress("p", () => music.paused = !music.paused);

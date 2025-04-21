@@ -101,253 +101,30 @@
     <script src="script.js"></script>
     <script type="module">
 
+        // import kaboom.js
+        import kaboom from "https://unpkg.com/kaboom@3000.0.1/dist/kaboom.mjs";
 
-import kaboom from "kaboom"
+        // initialize kaboom context
+        kaboom();
 
-const k = kaboom()
+        // add a piece of text at position (120, 80)
+// Adding game objects to screen
 
-k.onClick(() => k.addKaboom(k.mousePos()))
+// Start a kaboom game
+// Adding game objects to screen
 
-kaboom({
-    fullscreen: true,
-    background: [50, 15, 244], // RGB values for black background
-});
+// Start a kaboom game
+kaboom()
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+loadSprite("Sonic", "sonicrunsmallani2.gif")
+loadSprite("SkySanctuary", "SkySanctuary.jpg")
+loadSprite("Metal Sonic Ultra", "Ultra Metal Sonic.png")
 
-////// Levels //////
-
-function preload(){
-    setting = loadImage("/sprites/Cloud.png"); // optional background
-}
-
-function draw() {
-    background(240);
-    image(setting, 0, settingY, width, height);
-    image(setting, 0, settingY + height, width, height);
-    settingY--;
-    if (settingY < -height) settingY = 0;
-}
-
-volume(3);
-loadSound("Ded", "/music/sonicded.mp3");
-loadSound("jump", "/music/sonicjump.mp3");
-loadSprite("spike", "/sprites/spike.png");
-loadSprite("SkyClouds", "/sprites/SkyClouds NEW.png");
-loadSprite("Platform", "/sprites/platform.png");
-loadSprite("Pillar1", "/sprites/pillar.png");
-loadSprite("Pillar2", "/sprites/building.png");
-loadSprite("RampRight", "/sprites/ramp.png");
-loadSprite("SkySanctuary","/sprites/SkySanctuary.jpg")
-loadSprite("ring", "/sprites/Ring.png");
-loadSprite("jumpad", "/sprites/jumpad.png");
-loadSprite("SkySanctuaryLow", "/sprites/SkySanctuaryLow.png");
-loadSprite("grass", "/sprites/grass.png");
-loadSprite("GIANTRING!", "/sprites/giantring.gif");
-loadSound("Win", "/music/29-Act Cleared.mp3");
-loadSprite("ring", "/sprites/Ring2.png")
-loadSprite("DrRobotnik", "/sprites/Eggman.png")
-loadSprite("WinFlag", "/sprites/SonicWin.png")
-loadSprite("Cloud", "/sprites/SkySanctuaryClouds.png");
-loadSprite("Cloudv2", "/sprites/Cloud NEW.png");
-loadSprite("jumpad", "/sprites/jumpad.png");
-loadSound("blast", "/music/laser_hBUSmJ9.mp3");
+add([
+   sprite("SkySanctuary", {width: width(), height: height()})
+]);
 
 
-addLevel([
-
-     "                                                                                                                    ",
-     "                                                                                                                    ",
-     "                                                                                                                    ",
-     "                                                                                                                    ",
-     "************************************************************************************************************************************************",
-     "                                                                                                                    ",
-     "                                                                                                                    ",
-     "                                                                                                                    ",
-"~",  "~                                                                                                                  ",
-     "                                                                                                                    ",
-     "                                                                                                                    ",
-     "~                                                                                                                   ",
-     "                                                                                             _                      ",
-     "~                                            #                 #                                                                  ",
-     "          #     #                #                    #                           $   # ;   $      $  # ;   $    ;   $  ",
-     "      $|$          $|$           $|$                                        ========================================",
-     "       _            _             _                               ^         #                                                               ",
-     "~                                                                                                                                           ",
-     "                                                                                                                                            ",
-     "                                                                                                                      $      ;   $         !",
-     "                  $$$$     ;    $$    ;    $$   ;     $4      $$$                                                    =======================",
-     "~=======================================================================--------",
-"************************************************************************************************************************************************",
-"************************************************************************************************************************************************",
-"************************************************************************************************************************************************",
-"                                                                                                                                                ",
-"                                                                                                                                                ",
-
-], {
-    tileWidth: 80,
-    tileHeight: 50,
-    pos: vec2(10, 800),
-    tiles:
-    {
-        //Grass block floor
-        "=": () => [
-            sprite("grass"),
-            area(),
-            body({ isStatic: true }),
-            anchor("bot"),
-            "game"
-        ],
-
-        "/": () => [
-            sprite("RampRight"),
-            area(),
-            body({ isStatic: true }),
-            anchor("bot"),
-        ],
-
-        "_": () => [
-            sprite("Platform"),
-            area(),
-            body({ isStatic: true }),
-            anchor("bot"),
-        ],
-
-        "|": () => [
-            sprite("Pillar1"),
-            area(),
-            anchor("bot"),
-        ],
-
-        "~": () => [
-            sprite("Pillar2"),
-            area(),
-            body({ isStatic: true }),
-            anchor("bot"),
-        ],
-
-
-
-        "$": () => [
-            sprite("ring"),
-            area(),
-            scale(0.3),
-            anchor("bot"),
-            "ring",
-        ],
-
-        "&": () => [
-            sprite("Cloud"),
-            area(),
-
-        ],
-
-        ";": () => [
-            sprite("spike"),
-            area(),
-            anchor("bot"),
-            scale(0.4),
-            "danger",
-        ],
-        "!": () => [
-            sprite("GIANTRING!"),
-            area(),
-            anchor("bot"),
-            scale(0.5),
-            "win",
-        ],
-
-        '-': () => [
-        sprite("Cloudv2",),
-        anchor("top"),
-        area(),
-        z(1000),
-       "danger",
-
-    ],
-    '*': () => [
-        sprite("SkyClouds"),
-        area(100),
-        ],
-
-        "#": () =>[
-            sprite("Cloudv2",),
-            area(),
-            scale(2),
-        ],
-
-        "^": () =>[
-            sprite("jumpad"),
-            area(),
-            scale(0.85),
-            "jumpad",
-        ],
-
-    },
-
-});
-
-/////////////////////////////////////////////Sonicdef_p///////////////////////////////////////////////
-
-// Load assets
-loadSprite("title-bg", "path/to/your/title-background.png");
-loadSound("start", "path/to/your/start-sound.mp3");
-loadSprite("Ultra Metal", "Ultra Metal Sonic.png",)
-loadSprite("Sonic", "/sprites/sonic.png",
-
-    {
-    sliceX: 11,
-    // Define animations
-    anims: {
-        "idle": {
-            // Starts from frame 0, ends at frame 3
-            from:0,
-            to: 3,
-            // Frame per second
-            speed: 1,
-            loop: true,
-        },
-        "run": {
-            from:5,
-            to: 4,
-            speed: 30,
-            loop: true,
-        },
-        // This animation only has 1 frame
-        "jump": {
-            from:8,
-            to: 8,
-            speed: 30,
-            loop: true,
-        },
-        "super": {
-            from:9,
-            to: 9,
-            speed: 30,
-            loop: false,
-        },
-
-    },
-
-});
-
-volume(3)
-loadSound("Sky Sanctuary act 1", "/music/SkySanctuary.mp3",)
-
-const music = play("Sky Sanctuary act 1", {
-    loop: true,
-    paused: true,
-});
-
-onKeyPress("p", () => music.paused = !music.paused);
-onKeyPressRepeat("v", () => music.volume += 0.1);
-onKeyPressRepeat("y", () => music.volume -= 0.1);
-onKeyPressRepeat("o", () => music.speed -= 0.1);
-onKeyPressRepeat("r", () => music.speed += 0.1);
-onKeyPress("m", () => music.seek(4.24));
-
-setGravity(2000);
-// Add our player character
 const player = add([
     sprite("Sonic"),
     pos(100,1000),

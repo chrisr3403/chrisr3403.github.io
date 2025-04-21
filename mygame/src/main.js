@@ -13,6 +13,18 @@ kaboom({
 
 ////// Levels //////
 
+function preload(){
+    setting = loadImage("/sprites/Cloud.png"); // optional background
+}
+
+function draw() {
+    background(240);
+    image(setting, 0, settingY, width, height);
+    image(setting, 0, settingY + height, width, height);
+    settingY--;
+    if (settingY < -height) settingY = 0;
+}
+
 volume(3);
 loadSound("Ded", "/music/sonicded.mp3");
 loadSound("jump", "/music/sonicjump.mp3");
@@ -54,14 +66,15 @@ addLevel([
      "~                                                                                                                   ",
      "                                                                                             _                      ",
      "~                                            #                 #                                                                  ",
-     "          #     #                #                    #                           $   # ;   $   ;   $  # ;   $    ;   $  ",
+     "          #     #                #                    #                           $   # ;   $      $  # ;   $    ;   $  ",
      "      $|$          $|$           $|$                                        ========================================",
      "       _            _             _                               ^         #                                                               ",
      "~                                                                                                                                           ",
      "                                                                                                                                            ",
-     "**********************************************************************************************************************$      ;   $         !",
+     "                                                                                                                      $      ;   $         !",
      "                  $$$$     ;    $$    ;    $$   ;     $4      $$$                                                    =======================",
      "~=======================================================================--------",
+"************************************************************************************************************************************************",
 "************************************************************************************************************************************************",
 "************************************************************************************************************************************************",
 "                                                                                                                                                ",
@@ -73,6 +86,7 @@ addLevel([
     pos: vec2(10, 800),
     tiles:
     {
+        //Grass block floor
         "=": () => [
             sprite("grass"),
             area(),
@@ -214,7 +228,7 @@ loadSprite("Sonic", "/sprites/sonic.png",
 
 });
 
-volume(0.1)
+volume(3)
 loadSound("Sky Sanctuary act 1", "/music/SkySanctuary.mp3",)
 
 const music = play("Sky Sanctuary act 1", {
@@ -406,7 +420,6 @@ player.onCollide("jumpad", () => {
 
 loadSound("ringpickup", "/music/RingPickup.mp3");
 
-
 player.onCollide("ring", (ring) => {
     play("ringpickup")
     destroy(ring);
@@ -435,21 +448,6 @@ scene("lose", (score) => {
 	])
 
 });
-
-
-let score = 0
-
-const scoreLabel = add([
-    text(score),
-    pos(10, 800),
-])
-
-// increment score every frame
-onUpdate(() => {
-    score++
-    scoreLabel.text = score
-})
-
 
 
 

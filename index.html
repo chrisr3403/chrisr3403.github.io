@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
+
 <head>
     <title class="owner-name">#</title>
     <meta charset="utf-8">
@@ -36,7 +38,7 @@
                     <a class="nav-link" href="#" id="github" target="_blank">Github</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="mygame/src/main.js">Projects</a>
+                    <a class="nav-link" href="mygame/www/index.html">Projects</a>
                 </li>
             </ul>
         </div>
@@ -100,9 +102,11 @@
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
     <script src="script.js"></script>
     <script type="module">
+
 import kaboom from "kaboom"
 
 const k = kaboom()
+
 
 k.onClick(() => k.addKaboom(k.mousePos()))
 
@@ -321,7 +325,7 @@ loadSprite("Sonic", "/sprites/sonic.png",
         "super": {
             from:9,
             to: 9,
-            speed: 30,
+            speed: 100,
             loop: false,
         },
 

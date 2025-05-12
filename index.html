@@ -1,206 +1,259 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <style>
+            /* CSS */
+    </style>
+    </head>
+    <body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
+          -->
+        <script type="module">
 
-
-
-<head>
-    <title class="owner-name">#</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.css" rel="stylesheet" />
-    <link rel="stylesheet" href="style.css" type="text/css">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-
-
-</head>
-
-<body>
-
-    <!-- Navbar -->
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand owner-name" href="#"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" id="github" target="_blank">Github</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="mygame/www/index.html">Projects</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- First Container -->
-    <div class="container-fluid bg-1 text-center">
-        <!--<h1 class="margin">Name</h1>-->
-        <img src="img/avatar.png" class="img-fluid" alt="Logo" id="logo">
-    </div>
-
-    <!-- Second Container -->
-    <div class="container-fluid bg-2 text-center" id="projects">
-        <h3 class="margin">Projects</h3>
-        <p>Coming soon!</p>
-        <div class="container">
-            <div class="row">
-
-                <!--
-                <div class="col-sm-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Project Name</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">10th Grade</h6>
-                            <p class="card-text">A brief explanation of the project.</p>
-                            <a href="#" class="card-link">More</a>
-                        </div>
-                    </div>
-                </div>
-                -->
-
-            </div>
-        </div>
-        </a>
-    </div>
-
-    <!-- Third Container (Grid) -->
-    <div class="container-fluid bg-3 text-center">
-        <h3 class="margin">About Me</h3><br>
-        <div class="row">
-            <div class="col-sm-4">
-                <p>Lorem ipsum.</p>
-            </div>
-            <div class="col-sm-4">
-                <p>Lorem ipsum.</p>
-            </div>
-            <div class="col-sm-4">
-                <p>Lorem ipsum.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="container-fluid bg-4 text-center">
-        <a href="#" target="_blank" id="fork"><img src="img/fork.png"></a><br>
-        <a href="https://hstatsep.github.io" target="_blank"><img src="https://hstatsep.github.io/img/hstatsep-logo-small.png" id="sep"></a>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
-    <script src="script.js"></script>
-    <script type="module">
-
-import kaboom from "kaboom"
+import kaboom from "https://unpkg.com/kaboom@3000.0.1/dist/kaboom.mjs";
 
 const k = kaboom()
-
 
 k.onClick(() => k.addKaboom(k.mousePos()))
 
 kaboom({
     fullscreen: true,
-    background: [50, 15, 244], // RGB values for black background
+    background: [50, 10, 244], // RGB values for black background
 });
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ////// Levels //////
+loadSprite("Menu", "sprites/sonic_the_hedgehog_frame_by_supremechaos918_d7bh5y8-fullview.png")
+loadSound("MenuTheme", "music/Sonic 3 A.I.R. - Sonic 3 Theme(M4A_128K).mp3")
 
-function preload(){
-    setting = loadImage("/sprites/Cloud.png"); // optional background
-}
+scene("start", () => {
 
-function draw() {
-    background(240);
-    image(setting, 0, settingY, width, height);
-    image(setting, 0, settingY + height, width, height);
-    settingY--;
-    if (settingY < -height) settingY = 0;
-}
+	add([
+		text("Eat All"),
+		pos(center().sub(0, 100)),
+		scale(2),
+		anchor("center"),
+	])
+
+	add([
+		sprite("Menu"),
+		pos(center()),
+		scale(1),
+		anchor("center"),
+	])
+
+    onKeyPress(() => go("game"))
+})
 
 volume(3);
-loadSound("Ded", "/music/sonicded.mp3");
-loadSound("jump", "/music/sonicjump.mp3");
-loadSprite("spike", "/sprites/spike.png");
-loadSprite("SkyClouds", "/sprites/SkyClouds NEW.png");
-loadSprite("Platform", "/sprites/platform.png");
-loadSprite("Pillar1", "/sprites/pillar.png");
-loadSprite("Pillar2", "/sprites/building.png");
-loadSprite("RampRight", "/sprites/ramp.png");
-loadSprite("SkySanctuary","/sprites/SkySanctuary.jpg")
-loadSprite("ring", "/sprites/Ring.png");
-loadSprite("jumpad", "/sprites/jumpad.png");
-loadSprite("SkySanctuaryLow", "/sprites/SkySanctuaryLow.png");
-loadSprite("grass", "/sprites/grass.png");
-loadSprite("GIANTRING!", "/sprites/giantring.gif");
-loadSound("Win", "/music/29-Act Cleared.mp3");
-loadSprite("ring", "/sprites/Ring2.png")
-loadSprite("DrRobotnik", "/sprites/Eggman.png")
-loadSprite("WinFlag", "/sprites/SonicWin.png")
-loadSprite("Cloud", "/sprites/SkySanctuaryClouds.png");
-loadSprite("Cloudv2", "/sprites/Cloud NEW.png");
-loadSprite("jumpad", "/sprites/jumpad.png");
-loadSound("blast", "/music/laser_hBUSmJ9.mp3");
+loadSound("Ded", "music/sonicded.mp3")
+loadSound("jump", "music/sonicjump.mp3")
+loadSprite("spike", "sprites/Spikes3.png")
+loadSprite("SkyClouds", "sprites/SkyClouds NEW.png")
+loadSprite("Platform", "sprites/platform.png")
+loadSprite("Pillar1", "sprites/pillar.png")
+loadSprite("Pillar2", "sprites/building.png")
+loadSprite("RampRight", "sprites/ramp.png")
+loadSprite("SkySanctuary","sprites/SkySanctuary.jpg")
+loadSprite("jumpad", "sprites/jumpad.png")
+loadSprite("SkySanctuaryLow", "sprites/SkySanctuaryLow.png")
+loadSprite("grass", "sprites/grass.png")
+loadSprite("GIANTRING!", "sprites/giantring.gif")
+loadSprite("Pillar3", "sprites/PillarMech.png")
+loadSound("Win", "music/29-Act Cleared.mp3")
+loadSound("GiantRing", "music/giantring.mp3")
+loadSprite("DrRobotnik", "sprites/Eggman.png")
+loadSprite("WinFlag", "sprites/SonicWin.png")
+loadSprite("Cloud", "sprites/SkySanctuaryClouds.png")
+loadSprite("jumpad", "sprites/jumpad.png")
+loadSprite("Bounce", "sprites/BouncePad.png")
+loadSound("blast", "music/laser_hBUSmJ9.mp3")
+loadSprite("SkySanctuary","sprites/SkySanctuary.jpg")
+loadSprite("ring", "sprites/Ring2.png")
+loadSound("Spring", "music/spring-sonic-3.mp3")
+loadSound("SpikeDed", "music/SpikeSound.mp3")
+loadSprite("DeathEggfloor1", "sprites/DeathEggFloor2.png")
 
+setGravity(1700)
 
-addLevel([
+// custom component controlling enemy patrol movement
+function patrol(speed = 60, dir = 1) {
+	return {
+		id: "patrol",
+		require: [ "pos", "area" ],
+		add() {
+			this.on("collide", (obj, col) => {
+				if (col.isLeft() || col.isRight()) {
+					dir = -dir
+				}
+			})
+		},
+		update() {
+			this.move(speed * dir, 0)
+		},
+	}
+}
 
-     "                                                                                                                    ",
-     "                                                                                                                    ",
-     "                                                                                                                    ",
-     "                                                                                                                    ",
-     "************************************************************************************************************************************************",
-     "                                                                                                                    ",
-     "                                                                                                                    ",
-     "                                                                                                                    ",
-"~",  "~                                                                                                                  ",
-     "                                                                                                                    ",
-     "                                                                                                                    ",
-     "~                                                                                                                   ",
-     "                                                                                             _                      ",
-     "~                                            #                 #                                                                  ",
-     "          #     #                #                    #                           $   # ;   $      $  # ;   $    ;   $  ",
-     "      $|$          $|$           $|$                                        ========================================",
-     "       _            _             _                               ^         #                                                               ",
-     "~                                                                                                                                           ",
-     "                                                                                                                                            ",
-     "                                                                                                                      $      ;   $         !",
-     "                  $$$$     ;    $$    ;    $$   ;     $4      $$$                                                    =======================",
-     "~=======================================================================--------",
-"************************************************************************************************************************************************",
-"************************************************************************************************************************************************",
-"************************************************************************************************************************************************",
-"                                                                                                                                                ",
-"                                                                                                                                                ",
+// custom component that makes stuff grow big
+function big() {
+	let timer = 0
+	let isBig = false
+	let destScale = 1
+	return {
+		// component id / name
+		id: "big",
+		// it requires the scale component
+		require: [ "scale" ],
+		// this runs every frame
+		update() {
+			if (isBig) {
+				timer -= dt()
+				if (timer <= 0) {
+					this.smallify()
+				}
+			}
+			this.scale = this.scale.lerp(vec2(destScale), dt() * 6)
+		},
+		// custom methods
+		isBig() {
+			return isBig
+		},
+		smallify() {
+			destScale = 1
+			timer = 0
+			isBig = false
+		},
+		biggify(time) {
+			destScale = 2
+			timer = time
+			isBig = true
+		},
+	}
+}
 
-], {
-    tileWidth: 80,
-    tileHeight: 50,
-    pos: vec2(10, 800),
-    tiles:
-    {
-        //Grass block floor
+// define some constants
+const FALL_DEATH = 2400
+
+const LEVELS = [
+	[
+
+        "                                                                                                                    ",
+        "                                                                                                                    ",
+        "                                                                                                                    ",
+        "                                                                                                                    ",
+        "                                                                                                                    ",
+        "                                                                                                                    ",
+        "                                                                                                                    ",
+   "~",  "~                                                                                                                  ",
+        "                                                                                                                    ",
+        "                                                                                                                    ",
+        "~                                                                                             _                      ",
+        "                                                                                                                   ",
+        "~                                                                                                                                 ",
+        "                                                                             $    ;   $      $    ;   $    ;   $  ",
+        "      $|$          $|$           $|$                                        ========================================",
+        "       _            _             _                               ^                                                                         ",
+        "~                                                                                                                                           ",
+        "                                                                                                                                            ",
+        "             ?                                                                                                        $      ;   $         @",
+        "                  $$$$     ;    $$    ;    $$   ;     $4      $$$                                                    =======================",
+        "~=======================================================================",
+
+   "                                                                                                                                                ",
+   "                                                                                                                                                ",
+
+	],
+	[
+		"                          ",
+		"                          ",
+		"                          ",
+		"                          ",
+		"                          $",
+		"                          ",
+		"                          ",
+		"                          ",
+		"                          ",
+		"                          ",
+		"                          ",
+		"                          ",
+		"                          ",
+		"                          ",
+		"                          ",
+		"                          ",
+		"                       ",
+		"                                 ?           ?                                                ?                             ",
+		"                         ",
+		"         >                     >                     >       >       >       >       >      ",
+		"  <    $   $   $    $     $    $    <                                                                   <       <         ",
+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+"                                                                                                                                 ",
+"                                                                                                                                        @",
+"                                                                                                                                         ",
+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>;>>>>>>>>;>>>>>>;>>>>>>>>;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+	],
+	[
+		"     $    $    $    $     $",
+		"     $    $    $    $     $",
+		"                           ",
+		"                           ",
+        "                           ",
+        "                           ",
+		"                           ",
+		"                           ",
+		"                           ",
+		"                           ",
+        "                           ",
+        "                           ",
+		"                           ",
+		"                           ",
+        "                           ",
+		"                           ",
+		"                           ",
+        "                           ",
+        "                           ",
+		"                           ",
+        "                           ",
+		"                           ",
+		"                           ",
+		" ^$$$    $$$   ;;    ^    $$$   ?  $$$ ? $$$    ;;;;;;;;;;;;  @",
+"======================================================================="
+	],
+]
+
+        const levelConf = {
+        tileWidth: 80,
+        tileHeight: 50,
+        tiles: {
         "=": () => [
-            sprite("grass"),
-            area(),
-            body({ isStatic: true }),
-            anchor("bot"),
-            "game"
+			sprite("grass"),
+			area(),
+			body({ isStatic: true }),
+			anchor("bot"),
+			"platform",
         ],
 
+        ">": () => [
+			sprite("DeathEggfloor1"),
+			area(),
+            scale(1),
+			body({ isStatic: true }),
+			anchor("bot"),
+			"platform",
+        ],
+        "<": () => [
+			sprite("Pillar3"),
+			area(),
+            scale(1),
+			body({ isStatic: true }),
+			anchor("bot"),
+			"platform",
+        ],
         "/": () => [
             sprite("RampRight"),
             area(),
@@ -228,8 +281,6 @@ addLevel([
             anchor("bot"),
         ],
 
-
-
         "$": () => [
             sprite("ring"),
             area(),
@@ -251,23 +302,8 @@ addLevel([
             scale(0.4),
             "danger",
         ],
-        "!": () => [
-            sprite("GIANTRING!"),
-            area(),
-            anchor("bot"),
-            scale(0.5),
-            "win",
-        ],
 
-        '-': () => [
-        sprite("Cloudv2",),
-        anchor("top"),
-        area(),
-        z(1000),
-       "danger",
-
-    ],
-    '*': () => [
+        '*': () => [
         sprite("SkyClouds"),
         area(100),
         ],
@@ -284,282 +320,795 @@ addLevel([
             scale(0.85),
             "jumpad",
         ],
+         "?": () =>[
+            sprite("Bounce"),
+            area(),
+            scale(0.95),
+            "Bounce",
+        ],
+		"@": () => [
+			sprite("GIANTRING!"),
+			area({ scale: 0.5 }),
+			anchor("bot"),
+			pos(0, -12),
+			offscreen({ hide: true }),
+			"GIANTRING!",
+        ],
+    },
+}
+
+loadSound("Sky Sanctuary act 1", "music/217 Death Egg Zone ~ Act 1.mp3",)
+
+// (This might not play until user input due to browser policy)
+const music = play("Sky Sanctuary act 1", {
+	loop: true,
+	paused: false,
+})
+
+// Adjust global volume
+volume(0.5)
+
+const label = add([
+	text(),
+])
+
+function updateText() {
+	label.text = `
+${music.paused ? "Paused" : "Playing"}
+Time: ${music.time().toFixed(2)}
+Volume: ${music.volume.toFixed(2)}
+Speed: ${music.speed.toFixed(2)}
+
+[space] play/pause
+[up/down] volume
+[left/right] speed
+	`.trim()
+}
+
+updateText()
+
+// Update text every frame
+onUpdate(updateText)
+
+// Adjust music properties through input
+onKeyPress("p", () => music.paused = !music.paused)
+onKeyPressRepeat("up", () => music.volume += 0.1)
+onKeyPressRepeat("down", () => music.volume -= 0.1)
+onKeyPressRepeat("left", () => music.speed -= 0.1)
+onKeyPressRepeat("right", () => music.speed += 0.1)
+onKeyPress("m", () => music.seek(4.24))
+
+const keyboard = "awsedftgyhujk"
+
+// Simple piano with "bell" sound and the second row of a QWERTY keyboard
+for (let i = 0; i < keyboard.length; i++) {
+	onKeyPress(keyboard[i], () => {
+		play("bell", {
+			// The original "bell" sound is F, -500 will make it C for the first key
+			detune: i * 100 - 500,
+		})
+	})
+}
+
+// Draw music progress bar
+onDraw(() => {
+	if (!music.duration()) return
+	const h = 16
+	drawRect({
+		pos: vec2(0, height() - h),
+		width: music.time() / music.duration() * width(),
+		height: h,
+	})
+})
+
+scene("game", ({ levelId, rings } = { levelId: 0, rings: 0 }) => {
+
+	// add level to scene
+	const level = addLevel(LEVELS[levelId ?? 0], levelConf)
+
+
+loadSprite("Sonic", "sprites/sonicOG.png",
+
+{
+    sliceX: 8.943,
+    // Define animations
+    anims: {
+        "idle": {
+            // Starts from frame 0, ends at frame 3
+            from:0,
+            to: 4,
+            height:50,
+            width: 10,
+            // Frame per second
+            speed: 0.5,
+            loop: true,
+        },
+        "run": {
+            from:5,
+            to: 7,
+            speed: 20,
+            loop: true,
+        },
+        // This animation only has 1 frame
+        "jump": {
+            from:6,
+            to: 7,
+            speed: 10,
+            loop: true,
+        },
+        "super": {
+        from:8,
+        to: 8,
+        speed: 30,
+        loop: false,
+        },
+
 
     },
 
+
 });
 
-/////////////////////////////////////////////Sonicdef_p///////////////////////////////////////////////
+	// define player object
+    const player = add([
+		sprite("Sonic"),
+		pos(100, 800),
+		area(),
+		scale(1),
+		body(),
+		big(),
+		anchor("bot"),
+]);
 
-// Load assets
-loadSprite("title-bg", "path/to/your/title-background.png");
-loadSound("start", "path/to/your/start-sound.mp3");
-loadSprite("Ultra Metal", "Ultra Metal Sonic.png",)
-loadSprite("Sonic", "/sprites/sonic.png",
+    onKeyPress("space", () => {
+        player.flipX = false;
+        // .play() will reset to the first frame of the anim, so we want to make sure it only runs when the current animation is not "run"
+        if (player.isGrounded() && player.curAnim() !== "jump") {
+            player.play("jump");
+        }
+    });
 
-    {
-    sliceX: 11,
+    player.onUpdate(() => {
+        camPos(player.pos.x, player.pos.y)
+        camScale(1.7)
+    });
+
+  var SPEED = 500;
+
+    // .play is provided by sprite() component, it starts playing the specified animation (the animation information of "idle" is defined above in loadSprite)
+    player.play("idle");
+
+    // Switch to "idle" or "run" animation when player hits ground
+    player.onGround(() => {
+        if (!isKeyDown("left") && !isKeyDown("right")) {
+            player.play("idle");
+        }
+        else {
+            player.play("run");
+        }
+    });
+
+    onKeyPress("space", () => {
+        if (player.isGrounded()) {
+            player.jump(1000);
+            play("jump");
+        }
+    });
+
+    player.onAnimEnd((anim) => {
+        if (anim === "idle") {
+            // You can also register an event that runs when certain anim ends
+        }
+    });
+
+    onKeyDown("left", () => {
+        player.move(-SPEED, 4);
+        player.flipX = true;
+        // .play() will reset to the first frame of the anim, so we want to make sure it only runs when the current animation is not "run"
+        if (player.isGrounded() && player.curAnim() !== "run") {
+            player.play("run");
+        }
+    });
+
+    onKeyDown("right", () => {
+        player.move(SPEED, 4);
+        player.flipX = false;
+        if (player.isGrounded() && player.curAnim() !== "run") {
+            player.play("run");
+        }
+    });
+    ["left", "right"].forEach((key) => {
+        onKeyRelease(key, () => {
+            // Only reset to "idle" if player is not holding any of these keys
+            if (player.isGrounded() && !isKeyDown("left") && !isKeyDown("right")) {
+                player.play("idle");
+            }
+        });
+    });
+
+//////////////////////////////////////////////GameEditorCustom///////////////////////////////////////
+
+loadSprite("sparkle", "sprites/SparkleS.png",)
+loadSprite("SuperSonic", "sprites/SuperSonicV5.png",
+        {
+            sliceX: 11,
+            // Define animations
+            anims: {
+                "idle": {
+                    // Starts from frame 0, ends at frame 3
+                    from:0,
+                    to: 2,
+                    height:30,
+                    width: 100,
+                    // Frame per second
+                    speed: 10,
+                    loop: true,
+                },
+                "run": {
+                    from:8,
+                    to: 9,
+                    speed: 20,
+                    loop: true,
+                },
+                // This animation only has 1 frame
+                "jump": {
+                    from:3,
+                    to: 7,
+                    speed: 10,
+                    loop: true,
+                },
+                "super": {
+                from:10,
+                to: 10,
+                speed: 30,
+                loop: false,
+        },
+
+            },
+
+
+
+        });
+
+        loadSprite("Knuckles", "sprites/Knuckles (3).png",
+
+            {
+                sliceX: 13.3,
+                // Define animations
+                anims: {
+                    "idle": {
+                        // Starts from frame 0, ends at frame 3
+                        from:0,
+                        to: 3,
+                        height:30,
+                        width: 100,
+                        // Frame per second
+                        speed: 2,
+                        loop: true,
+                    },
+                    "run": {
+                        from:9,
+                        to: 10,
+                        speed: 15,
+                        loop: true,
+                    },
+                    // This animation only has 1 frame
+                    "jump": {
+                        from:4,
+                        to: 8,
+                        speed: 20,
+                        loop: true,
+                    },
+                    "super": {
+                    from:8,
+                    to: 8,
+                    speed: 30,
+                    loop: false,
+            },
+
+        },
+
+     });
+     loadSprite("SuperKnuckles", "sprites/SuperKnuckles.png",
+
+            {
+                sliceX: 13.3,
+                // Define animations
+                anims: {
+                    "idle": {
+                        // Starts from frame 0, ends at frame 3
+                        from:0,
+                        to: 3,
+                        height:30,
+                        width: 100,
+                        // Frame per second
+                        speed: 1,
+                        loop: true,
+                    },
+                    "run": {
+                        from:9,
+                        to: 10,
+                        speed: 15,
+                        loop: true,
+                    },
+                    // This animation only has 1 frame
+                    "jump": {
+                        from:4,
+                        to: 8,
+                        speed: 20,
+                        loop: true,
+                    },
+                    "super": {
+                    from:8,
+                    to: 8,
+                    speed: 30,
+                    loop: false,
+            },
+
+        },
+
+     });
+     loadSprite("Tails", "sprites/Tails-Miles_Prower.png",
+
+        {
+            sliceX: 14,
+            // Define animations
+            anims: {
+                "idle": {
+                    // Starts from frame 0, ends at frame 3
+                    from:0,
+                    to: 3,
+                    height:30,
+                    width: 50,
+                    // Frame per second
+                    speed: 1,
+                    loop: true,
+                },
+                "run": {
+                    from:6,
+                    to: 12,
+                    speed: 15,
+                    loop: false,
+                },
+                // This animation only has 1 frame
+                "jump": {
+                    from:4,
+                    to: 5,
+                    speed: 20,
+                    loop: true,
+                },
+                "super": {
+                from:8,
+                to: 8,
+                speed: 30,
+                loop: false,
+        },
+
+    },
+
+ });
+
+        function createParticleEffect(playerPos) {
+            const particle = add([
+              sprite("sparkle"),
+              pos(playerPos.x + -100, playerPos.y + -150),
+              lifespan(0.9, { fade: -10 }),
+              move(choose([LEFT, RIGHT, UP, DOWN]), 120),
+            ]);
+          }
+
+          function SonicSprite() {
+            player.scale = vec2(1)
+            player.use(sprite("Sonic"));
+        }
+
+
+
+    function SuperSonicSprite() {
+    player.use(sprite("SuperSonic"));
+    player.scale = vec2(1.5)
+
+}
+
+        function KnucklesSprite() {
+            player.scale = vec2(1.2)
+            player.use(sprite("Knuckles"));
+
+
+        }
+        function SuperKnucklesSprite() {
+            player.scale = vec2(1.2)
+            player.use(sprite("SuperKnuckles"));
+
+
+        }
+        function MilesSprite() {
+            player.scale = vec2(1.5)
+            player.use(sprite("Tails"));
+
+
+        }
+
+        loadSound("Swap", "music/SwapChar.mp3",)
+        loadSound("SuperTransform", "music/SuperSonicTransForm.mp3",)
+
+        onKeyPress("1", () => {
+            SonicSprite();
+            scale(1000);
+            setGravity(1700);
+            play("Swap")
+            player.play("idle");
+        });
+
+    onKeyPress("s", () => {
+    SuperSonicSprite();
+    setGravity(700);
+    scale(1000);
+    player.play("super");
+});
+
+        onKeyPress("s", () => {
+            play("SuperTransform")
+            scale(1000);
+            loop(0.3, () => {
+            createParticleEffect(player.pos);
+            });
+        });
+
+        onKeyPress("s", () => {
+           SPEED = SPEED =+ 1000
+        });
+
+        onKeyPress("3", () => {
+            KnucklesSprite();
+            setGravity(2200);
+            player.play("idle");
+            play("Swap")
+        });
+
+        onKeyPress("k", () => {
+            SuperKnucklesSprite();
+            setGravity(2200);
+            player.play("idle");
+            play("SuperTransform")
+            loop(0.3, () => {
+            createParticleEffect(player.pos);
+            });
+        });
+
+        onKeyPress("k", () => {
+            SPEED = SPEED =+ 1000
+         });
+
+         onKeyPress("2", () => {
+            MilesSprite();
+            player.play("idle");
+            play("Swap")
+            scale(-100)
+        });
+
+    const getInfo = () =>
+    `
+    Anim: ${player.curAnim()}
+    Frame: ${player.frame}
+    `.trim();
+
+loadSprite("MetalBoss", "sprites/MetalSonic_Boss.png",)
+
+const ENEMY_SPEED = 860
+const BULLET_SPEED = 800
+
+// Add player game object
+
+const enemy = add([
+	sprite("MetalBoss"),
+	pos(width() - 80, height() - 80),
+	anchor("center"),
+	// This enemy cycle between 3 states, and start from "idle" state
+	state("move", [ "idle", "attack", "move" ]),
+])
+
+// Run the callback once every time we enter "idle" state.
+// Here we stay "idle" for 0.5 second, then enter "attack" state.
+enemy.onStateEnter("idle", async () => {
+	await wait(0)
+	enemy.enterState("attack")
+
+})
+
+// When we enter "attack" state, we fire a bullet, and enter "move" state after 1 sec
+enemy.onStateEnter("attack", async () => {
+
+
+	// Don't do anything if player doesn't exist anymore
+	if (player.exists()) {
+
+		const dir = player.pos.sub(enemy.pos).unit()
+
+loadSprite("FireBall", "sprites/Fire.png",
+{
+    sliceX: 4,
     // Define animations
     anims: {
         "idle": {
             // Starts from frame 0, ends at frame 3
             from:0,
             to: 3,
+            height:50,
+            width: 10,
             // Frame per second
             speed: 1,
             loop: true,
         },
-        "run": {
-            from:5,
-            to: 4,
-            speed: 30,
-            loop: true,
-        },
-        // This animation only has 1 frame
-        "jump": {
-            from:8,
-            to: 8,
-            speed: 30,
-            loop: true,
-        },
-        "super": {
-            from:9,
-            to: 9,
-            speed: 100,
-            loop: false,
-        },
 
     },
 
-});
-
-volume(3)
-loadSound("Sky Sanctuary act 1", "/music/SkySanctuary.mp3",)
-
-const music = play("Sky Sanctuary act 1", {
-    loop: true,
-    paused: false,
-});
-
-onKeyPress("p", () => music.paused = !music.paused);
-onKeyPressRepeat("v", () => music.volume += 0.1);
-onKeyPressRepeat("y", () => music.volume -= 0.1);
-onKeyPressRepeat("o", () => music.speed -= 0.1);
-onKeyPressRepeat("r", () => music.speed += 0.1);
-onKeyPress("m", () => music.seek(4.24));
-
-setGravity(2000);
-// Add our player character
-const player = add([
-    sprite("Sonic"),
-    pos(100,1000),
-    anchor("bot"),
-    area(),
-    body(),
-    scale(1.5)
-]);
-
-onKeyPress("space", () => {
-    player.flipX = true;
-    // .play() will reset to the first frame of the anim, so we want to make sure it only runs when the current animation is not "run"
-    if (player.isGrounded() && player.curAnim() !== "jump") {
-        player.play("jump");
-    }
-});
-
-player.onUpdate(() => {
-    camPos(player.pos)
-});
-
-const SPEED = 500;
-
-// .play is provided by sprite() component, it starts playing the specified animation (the animation information of "idle" is defined above in loadSprite)
-player.play("idle");
-
-// Switch to "idle" or "run" animation when player hits ground
-player.onGround(() => {
-    if (!isKeyDown("left") && !isKeyDown("right")) {
-        player.play("idle");
-    }
-    else {
-        player.play("run");
-    }
-});
-
-onKeyPress("space", () => {
-    if (player.isGrounded()) {
-        player.jump(1000);
-        play("jump");
-    }
-});
-
-player.onAnimEnd((anim) => {
-    if (anim === "idle") {
-        // You can also register an event that runs when certain anim ends
-    }
-});
-
-onKeyDown("left", () => {
-    player.move(-SPEED, 4);
-    player.flipX = true;
-    // .play() will reset to the first frame of the anim, so we want to make sure it only runs when the current animation is not "run"
-    if (player.isGrounded() && player.curAnim() !== "run") {
-        player.play("run");
-    }
-});
-
-onKeyDown("right", () => {
-    player.move(SPEED, 4);
-    player.flipX = false;
-    if (player.isGrounded() && player.curAnim() !== "run") {
-        player.play("run");
-    }
-});
-["left", "right"].forEach((key) => {
-    onKeyRelease(key, () => {
-        // Only reset to "idle" if player is not holding any of these keys
-        if (player.isGrounded() && !isKeyDown("left") && !isKeyDown("right")) {
-            player.play("idle");
-        }
-    });
-});
-
-loadSprite("SuperSonic", "/sprites/SuperSonic.png",
-    {
-        sliceX: 9,
-        // Define animations
-        anims: {
-            "idle": {
-                // Starts from frame 0, ends at frame 3
-                from:0,
-                to: 4,
-                // Frame per second
-                speed: 10,
-                loop: true,
-            },
-            "run": {
-                from:5,
-                to: 8,
-                speed: 60,
-                loop: true,
-            },
-            // This animation only has 1 frame
-            "jump": {
-                from:5,
-                to: 8,
-                speed: 60,
-                loop: true,
-            },
-
-        },
-
-    });
-
-    function spawnParticles(x, y) {
-        for (let i = 0; i < 10; i++) {
-            add([
-                pos(x, y),
-                rect(4, 4),
-                color(rand(0, 255), rand(0, 255), rand(0, 255)),
-                lifespan(100, { fade: 0.1 }),
-                move(rand(0, 360), rand(50, 100)),
-            ]);
-        }
-    }
-
-    function swapPlayerSprite() {
-        scale(1000)
-        player.use(sprite("SuperSonic"));
-        player.scale = vec2(2)
-        player.speed = vec2(1000000)
-
-    }
-
-    loadSound("SuperSonicM", "/music/Super Sonic (Sonic 3 & Knuckles).wav",)
-
-    onKeyPress("s", () => {
-        swapPlayerSprite();
-        scale(1000)
-        setGravity(500);
-        (SPEED, 50);
-        spawnParticles(player.pos.x, player.pos.y);
-        loop(0.5, spawnParticles);
-        play("SuperSonicM")
-
-    });
-
-
-
-const getInfo = () =>
-    `
-Anim: ${player.curAnim()}
-Frame: ${player.frame}
-`.trim();
-
-player.onCollide("win", () => {
-    go("win");
-    play("Win")
-});
-
-scene("win", () => {
-    add([
-		sprite("WinFlag"),
-		pos(width() / 2, height() / 2 - 64),
-		scale(2),
-		anchor("center"),
-	])
-
-    add([
-		text("Sonic Passed Act"),
-		pos(width() / 2, height() / 2 + 64),
-		scale(2),
-		anchor("center"),
-	])
 
 });
 
-
-player.onCollide("jumpad", () => {
-    player.jump(1800); // Adjust the jump force as needed
-    play("blast");
-});
-
-loadSound("ringpickup", "/music/RingPickup.mp3");
-
-player.onCollide("ring", (ring) => {
-    play("ringpickup")
-    destroy(ring);
-    // You can also add other actions here, like increasing the score
-});
-
-player.onCollide("danger", () => {
-    go("lose");
-    play("Ded")
-});
-
-scene("lose", (score) => {
 
 	add([
-		sprite("DrRobotnik"),
-		pos(width() / 2, height() / 2 - 64),
-		scale(2),
-		anchor("center"),
-	])
+	pos(enemy.pos),
+	sprite("FireBall"),           // Use your loaded sprite
+	scale(1.5),                 // Optional: scale down the bullet
+	area(),
+	move(dir, BULLET_SPEED),
+	offscreen({ destroy: true }),
+	anchor("center"),
+	"bullet",
+])
 
-    add([
-		text("Game Over"),
-		pos(width() / 2, height() / 2 + 64),
-		scale(2),
-		anchor("center"),
-	])
 
+	}
+
+	await wait(0)
+	enemy.enterState("move")
+
+})
+
+enemy.onStateEnter("move", async () => {
+	await wait(2)
+	enemy.enterState("idle")
+})
+
+player.onGround((l) => {
+		if (l.is("enemy")) {
+			player.jump(JUMP_FORCE * 1.5)
+			destroy(l)
+			addKaboom(player.pos)
+			play("powerup")
+		}
+	})
+
+
+// Like .onUpdate() which runs every frame, but only runs when the current state is "move"
+// Here we move towards the player every frame if the current state is "move"
+enemy.onStateUpdate("move", () => {
+	if (!player.exists()) return
+	const dir = player.pos.sub(enemy.pos).unit()
+	enemy.move(dir.scale(ENEMY_SPEED))
+    enemy.flipX = player.pos.x > enemy.pos.x;
+
+})
+
+// Taking a bullet makes us disappear
+player.onCollide("bullet", (bullet) => {
+	destroy(bullet)
+	destroy(player)
+    go("lose")
+	addKaboom(bullet.pos)
+})
+
+// Register input handlers & movement
+onKeyDown("left", () => {
+	player.move(-SPEED, 0)
+})
+
+onKeyDown("right", () => {
+	player.move(SPEED, 0)
+})
+
+onKeyDown("up", () => {
+	player.move(0, -SPEED)
+})
+
+onKeyDown("down", () => {
+	player.move(0, SPEED)
+})
+
+    ///////////////////////////Pickups/win/lose///////////////////////
+
+    player.onCollide("win", () => {
+        go("win");
+        play("Win")
+    });
+
+    scene("win", () => {
+        add([
+            sprite("WinFlag"),
+            pos(width() / 2, height() / 2 - 64),
+            scale(2),
+            anchor("center"),
+        ])
+
+
+        add([
+            text("You Passed all Acts Rings:" + coins ),
+            pos(width() / 2, height() / 2 + 64),
+            scale(2),
+            text("Total Rings: " + coins),
+            anchor("center"),
+        ])
+
+    });
+
+
+    player.onCollide("jumpad", () => {
+        player.jump(1800); // Adjust the jump force as needed
+        play("blast");
+    });
+
+    player.onCollide("Bounce", () => {
+        play("Spring")
+        player.jump(1200); // Adjust the jump force as needed
+    });
+
+    loadSound("ringpickup", "music/RingPickup.mp3")
+
+	// action() runs every frame
+	player.onUpdate(() => {
+		// center camera to player
+		camPos(player.pos.x, player.pos.y)
+		// check fall death
+		if (player.pos.y >= FALL_DEATH) {
+			go("lose")
+		}
+	})
+
+	player.onBeforePhysicsResolve((collision) => {
+		if (collision.target.is(["platform", "soft"]) && player.isJumping()) {
+			collision.preventResolution()
+		}
+	})
+
+	player.onPhysicsResolve(() => {
+		// Set the viewport center to player.pos
+		camPos(player.pos)
+	})
+
+	// if player onCollide with any obj with "danger" tag, lose
+	player.onCollide("danger", () => {
+		go("lose")
+		play("SpikeDed")
+	})
+
+	player.onCollide("GIANTRING!", () => {
+		play("GiantRing")
+		if (levelId + 1 < LEVELS.length) {
+			go("game", {
+				levelId: levelId + 1,
+				rings: rings,
+			})
+		} else {
+			go("win")
+		}
+	})
+
+
+	player.onGround((l) => {
+		if (l.is("enemy")) {
+			player.jump(JUMP_FORCE * 1.5)
+			destroy(l)
+			addKaboom(player.pos)
+			play("powerup")
+		}
+	})
+
+	player.onCollide("enemy", (e, col) => {
+		// if it's not from the top, die
+		if (!col.isBottom()) {
+			go("lose")
+			play("Ded")
+		}
+	})
+
+	let hasApple = false
+
+	// grow an apple if player's head bumps into an obj with "prize" tag
+	player.onHeadbutt((obj) => {
+		if (obj.is("prize") && !hasApple) {
+			const apple = level.spawn("#", obj.tilePos.sub(0, 1))
+			apple.jump()
+			hasApple = true
+			play("blip")
+		}
+	})
+
+	// player grows big onCollide with an "apple" obj
+	player.onCollide("apple", (a) => {
+		destroy(a)
+		// as we defined in the big() component
+		player.biggify(3)
+		hasApple = false
+		play("powerup")
+	})
+
+	let ringPitch = 0
+
+    let score = 0
+
+	let coins = 0;
+
+// Add the label to show "Rings: 0" at the start
+const coinsLabel = add([
+	text(`Rings: ${coins}`),
+	pos(24, 24),
+	fixed(),
+	color(255, 255, 0), // Optional: Yellow text like classic Sonic
+	scale(1.2),
+]);
+
+// Update coins when colliding with a ring
+player.onCollide("ring", (c) => {
+	destroy(c);
+	play("ringpickup");
+	coins += 1;
+	coinsLabel.text = `Rings: ${coins}`; // Update the label text
 });
 
+	function jump() {
+		// these 2 functions are provided by body() component
+		if (player.isGrounded()) {
+			player.jump(JUMP_FORCE)
+		}
+	}
+const scoreLabel = add([
+		text(score),
+		pos(12),
+	])
+
+})
+
+function start() {
+	// Start with the "game" scene, with initial parameters
+	go("game", {
+		levelIdx: 0,
+		score: 0,
 
 
+	})
+    add([
+        text("Game Over"),
+        pos(width() / 2, height() / 2 + 64),
+        scale(2),
+        anchor("center"),
+    ])
 
+}
+
+scene("lose", () => {
+    text("rings"),
+
+
+    add([
+        sprite("DrRobotnik"),
+        pos(width() / 2, height() / 2 - 64),
+        scale(2),
+        anchor("center"),
+    ])
+    onKeyPress(() => go("game"))
+
+    add([
+        text("Game Over"),
+        pos(width() / 2, height() / 2 + 64),
+        scale(2),
+        anchor("center"),
+    ])
+
+})
+
+go("start")
 
         </script>
-</body>
-
+    </body>
 </html>
